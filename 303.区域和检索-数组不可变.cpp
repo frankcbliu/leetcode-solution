@@ -25,6 +25,7 @@ class NumArray {
   }
 
  private:
+  // 类变量
   vector<int> sum;
 };
 
