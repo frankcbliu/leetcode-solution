@@ -1,5 +1,0 @@
-/data/leetcode-solution/cmake-build-debug/CMakeFiles/1-two-sum.dir
-/data/leetcode-solution/cmake-build-debug/CMakeFiles/2-add-two-numbers.dir
-/data/leetcode-solution/cmake-build-debug/CMakeFiles/15-3sum.dir
-/data/leetcode-solution/cmake-build-debug/CMakeFiles/edit_cache.dir
-/data/leetcode-solution/cmake-build-debug/CMakeFiles/rebuild_cache.dir
