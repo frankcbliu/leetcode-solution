@@ -1,6 +1,27 @@
 # leetcode-solution
-leetcode 题解 - 基于 C++
-> 个人训练题集
+leetcode 题解 - 个人训练题集(c++)
+
+> 基于 Clion 的 `Leetcode Editor` 插件 + `Single File Execution` 插件
+
+## 0.Clion插件配置
+
+- Code Template
+```c++
+${question.content}
+
+\#include "headers.h"
+
+${question.code}
+
+int main() {
+  Solution s;
+  vector<int> arr{7, 1, 5, 3, 6, 4};
+  auto res = s.twoSum(arr, 11);
+  showVector(res);
+}
+```
+
+headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ## 1.动态规划
 - [x] 509-斐波那契数列
@@ -14,3 +35,5 @@ leetcode 题解 - 基于 C++
 
 ## 2.回溯法
 - [ ] 980-不同路径III
+
+
