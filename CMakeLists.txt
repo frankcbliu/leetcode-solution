@@ -17,3 +17,4 @@ add_executable(416-partition-equal-subset-sum leetcode/editor/cn/416-partition-e
 add_executable(1046-last-stone-weight leetcode/editor/cn/1046-last-stone-weight.cpp)
 add_executable(1049-last-stone-weight-ii leetcode/editor/cn/1049-last-stone-weight-ii.cpp)
 add_executable(2765-longest-alternating-subarray leetcode/editor/cn/2765-longest-alternating-subarray.cpp)
+add_executable(contest contest.cpp leetcode/editor/cn/headers.h)

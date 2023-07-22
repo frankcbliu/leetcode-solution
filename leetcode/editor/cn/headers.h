@@ -41,6 +41,14 @@ struct ListNode {
 };
 
 // 遍历输出数组
+template<typename T>
+void showVector(vector<T> arr) {
+    for (int i = 0; i < arr.size(); ++i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
 void showVector(vector<int> arr) {
     for (int i = 0; i < arr.size(); ++i) {
         cout << arr[i] << " ";
