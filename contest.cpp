@@ -59,25 +59,90 @@ int numberOfWays(int n, int x) {
     return dp[n];
 }
 
+long long maxArrayValue(vector<int> &nums) {
+    int n = nums.size();
+    vector<long long> c(n, 0);
+    std::copy(nums.begin(), nums.end(), c.begin());
+    while (c.size() > 1) {
+        n = c.size();
+        for (int i = n - 1; i > 0; --i) {
+            if (c[i - 1] <= c[i]) {
+                c[i] += c[i - 1];
+                c.erase(c.begin() + i - 1);
+                break;
+            }
+        }
+        if (n == c.size())
+            break;
+    }
+    return *std::max_element(c.begin(), c.end());
+}
+
+
+int maxIncreasingGroups(vector<int> &usageLimits) {
+    std::sort(usageLimits.begin(), usageLimits.end());
+    // 双指针
+    int left = 1, right = usageLimits.size();
+    while (left < right) {
+        int mid = (left + right + 1) / 2, count = 0;
+        for (int i = 0; i < usageLimits.size(); i++) {
+            count += max(0, mid - i);
+            count -= min(count, usageLimits[usageLimits.size() - i - 1]);
+        }
+        if (count == 0) {
+            left = mid;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
+
 int main() {
     vector<int> arr{8, 50, 65, 85, 8, 73, 55, 50, 29, 95, 5, 68, 52, 79};
     long long res = maxScore(arr, 74);
+
+    arr = {1, 2, 5};
+    res = maxIncreasingGroups(arr);
     cout << res << endl;
-    assert(res == 470);
+    assert(res == 3);
+
+    arr = {2, 2, 2};
+    res = maxIncreasingGroups(arr);
+    cout << res << endl;
+    assert(res == 3);
+
+    arr = {1, 1};
+    res = maxIncreasingGroups(arr);
+    cout << res << endl;
+    assert(res == 1);
 
     arr = {2, 3, 6, 1, 9, 2};
     res = maxScore(arr, 5);
     cout << res << endl;
     assert(res == 13);
 
-    res = numberOfWays(10, 2);
-    cout << res << endl;
-    assert(res == 1);
-    res = numberOfWays(4, 1);
-    cout << res << endl;
-    assert(res == 2);
-    res = numberOfWays(2, 2);
-    cout << res << endl;
-    assert(res == 0);
+    //    cout << res << endl;
+    //    assert(res == 470);
+    //
+    //    arr = {2, 3, 6, 1, 9, 2};
+    //    res = maxScore(arr, 5);
+    //    cout << res << endl;
+    //    assert(res == 13);
+    //
+    //    res = numberOfWays(10, 2);
+    //    cout << res << endl;
+    //    assert(res == 1);
+    //    res = numberOfWays(4, 1);
+    //    cout << res << endl;
+    //    assert(res == 2);
+    //    res = numberOfWays(2, 2);
+    //    cout << res << endl;
+    //    assert(res == 0);
+
+    //    arr = {2, 3, 7, 9, 3};
+    //    res = maxArrayValue(arr);
+    //    cout << res << endl;
+    //    assert(res == 21);
     return 0;
 }
