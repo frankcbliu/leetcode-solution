@@ -19,3 +19,4 @@ add_executable(1049-last-stone-weight-ii leetcode/editor/cn/1049-last-stone-weig
 add_executable(2765-longest-alternating-subarray leetcode/editor/cn/2765-longest-alternating-subarray.cpp)
 add_executable(contest contest.cpp leetcode/editor/cn/headers.h)
 add_executable(518-coin-change-ii leetcode/editor/cn/518-coin-change-ii.cpp)
+add_executable(322-coin-change leetcode/editor/cn/322-coin-change.cpp)

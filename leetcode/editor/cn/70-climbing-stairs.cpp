@@ -40,7 +40,27 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
+    // 利用完全背包解法
     int climbStairs(int n) {
+        int m = 2;
+        // 1. dp[i]: 爬到第 i 级楼梯的组合数
+        // 2. for(i: 0->n)
+        //      for(j: 1->m)
+        //          dp[i] += dp[i - j] (i >= j)
+        // 3. 初始化
+        //    递推式为累加，dp[0] 必须为1, 否则都是 0
+        vector<int> dp(n + 1, 0);
+        dp[0] = 1;
+        for (int i = 0; i <= n; ++i) {    // 容量
+            for (int j = 1; j <= m; ++j) {// 物品
+                if (i >= j)
+                    dp[i] += dp[i - j];
+            }
+        }
+        return dp[n];
+    }
+
+    int climbStairs2(int n) {
         if (n <= 2) return n;
         int d1, d2, sum;
         d1 = 1;
