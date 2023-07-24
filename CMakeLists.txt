@@ -20,3 +20,4 @@ add_executable(2765-longest-alternating-subarray leetcode/editor/cn/2765-longest
 add_executable(contest contest.cpp leetcode/editor/cn/headers.h)
 add_executable(518-coin-change-ii leetcode/editor/cn/518-coin-change-ii.cpp)
 add_executable(322-coin-change leetcode/editor/cn/322-coin-change.cpp)
+add_executable(139-word-break leetcode/editor/cn/139-word-break.cpp)
