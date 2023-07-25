@@ -41,6 +41,36 @@ struct ListNode {
     }
 };
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    TreeNode *ArrayTree(vector<int> nums, int i, int n) {
+        TreeNode *p = nullptr;
+        if (i > n || nums.empty() || nums[i] == -1) {
+            return p;
+        }
+        if (i < n) {
+            p = new TreeNode();
+            p->val = nums[i];
+            p->left = ArrayTree(nums, 2 * i + 1, n);
+            p->right = ArrayTree(nums, 2 * i + 2, n);
+        }
+        return p;
+    }
+    TreeNode(vector<int> nums) {
+        if (nums.empty())
+            return;
+        TreeNode *data = ArrayTree(nums, 0, nums.size());
+        this->val = data->val;
+        this->left = data->left;
+        this->right = data->right;
+    }
+};
+
 // 遍历输出数组
 template<typename T>
 void showVector(vector<T> arr) {
