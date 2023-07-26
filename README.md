@@ -63,7 +63,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 ### 股票买卖篇
 
 - [x] [121-买卖股票的最佳时机](./leetcode/editor/cn/121-best-time-to-buy-and-sell-stock.cpp)
-- [ ] 122-买卖股票的最佳时机II
+- [x] [122-买卖股票的最佳时机II](./leetcode/editor/cn/122-best-time-to-buy-and-sell-stock-ii.cpp)
 - [ ] 123-买卖股票的最佳时机III
 - [ ] 188-买卖股票的最佳时机IV
 - [ ] 309-最佳买卖股票时机含冷冻期
