@@ -25,38 +25,40 @@ int main() {
 
 headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
+> link template: (./leetcode/editor/cn/)
+
 ## 1.动态规划
 
-- [x] 509-斐波那契数列
-- [x] 70-爬楼梯
-- [x] 746-使用最小花费爬楼梯
-- [x] 62-不同路径
-- [x] 63-不同路径II
-- [x] 343-整数拆分
-- [x] 96-不同的二叉搜索树
+- [x] [509-斐波那契数列](./leetcode/editor/cn/509-fibonacci-number.cpp)
+- [x] [70-爬楼梯](./leetcode/editor/cn/70-climbing-stairs.cpp)
+- [x] [746-使用最小花费爬楼梯](./leetcode/editor/cn/746-min-cost-climbing-stairs.cpp)
+- [x] [62-不同路径](./leetcode/editor/cn/62-unique-paths.cpp)
+- [x] [63-不同路径II](./leetcode/editor/cn/63-unique-paths-ii.cpp)
+- [x] [343-整数拆分](./leetcode/editor/cn/343-integer-break.cpp)
+- [x] [96-不同的二叉搜索树](./leetcode/editor/cn/96-unique-binary-search-trees.cpp)
 
 ### 01背包
 
-- [x] 416-分割等和子集
-- [x] 1049-最后一块石头的重量II
-- [x] 494-目标和
-- [x] 474-一和零
-- [x] 6922-将一个数字表示成幂的和的方案数(109双周赛,T4)
+- [x] [416-分割等和子集](./leetcode/editor/cn/416-partition-equal-subset-sum.cpp)
+- [x] [1049-最后一块石头的重量II](./leetcode/editor/cn/1049-last-stone-weight-ii.cpp)
+- [x] [494-目标和](./leetcode/editor/cn/494-target-sum.cpp)
+- [x] [474-一和零](./leetcode/editor/cn/474-ones-and-zeroes.cpp)
+- [x] [2787-将一个数字表示成幂的和的方案数(109双周赛,T4)](./leetcode/editor/cn/2787-ways-to-express-an-integer-as-sum-of-powers.cpp)
 
 ### 完全背包
 
-- [x] 518-零钱兑换II
-- [x] 377-组合总和Ⅳ
-- [x] 70-爬楼梯(进阶版)
-- [x] 322-零钱兑换
-- [x] 279-完全平方数
-- [x] 139-单词拆分(也可用回溯法，但动态规划的时间复杂度更优)
+- [x] [518-零钱兑换II](./leetcode/editor/cn/518-coin-change-ii.cpp)
+- [x] [377-组合总和Ⅳ](./leetcode/editor/cn/377-combination-sum-iv.cpp)
+- [x] [70-爬楼梯(进阶版)](./leetcode/editor/cn/70-climbing-stairs.cpp)
+- [x] [322-零钱兑换](./leetcode/editor/cn/322-coin-change.cpp)
+- [x] [279-完全平方数](./leetcode/editor/cn/279-perfect-squares.cpp)
+- [x] [139-单词拆分(也可用回溯法，但动态规划的时间复杂度更优)](./leetcode/editor/cn/139-word-break.cpp)
 
 ### 打家劫舍篇
 
-- [x] 198-打家劫舍
-- [x] 213-打家劫舍II
-- [x] 337-打家劫舍III (树形DP)
+- [x] [198-打家劫舍](./leetcode/editor/cn/198-house-robber.cpp)
+- [x] [213-打家劫舍II](./leetcode/editor/cn/213-house-robber-ii.cpp)
+- [x] [337-打家劫舍III (树形DP)](./leetcode/editor/cn/337-house-robber-iii.cpp)
 
 ### 股票买卖篇
 
@@ -87,9 +89,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ## 3.周赛(T1)
 
-- [x] 2778-特殊元素平方和
-- [x] 2769-找出最大的可达成数字
-- [x] 2765-最长交替子序列(写得有点复杂了)
+- [x] [2778-特殊元素平方和](./leetcode/editor/cn/2778-sum-of-squares-of-special-elements.cpp)
+- [x] [2769-找出最大的可达成数字](./leetcode/editor/cn/2769-find-the-maximum-achievable-number.cpp)
+- [x] [2765-最长交替子序列(写得有点复杂了)](./leetcode/editor/cn/2765-longest-alternating-subarray.cpp)
 
 ### 动态规划篇(先按分数排序, 刷完后再分类)
 
