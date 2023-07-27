@@ -25,3 +25,4 @@ add_executable(213-house-robber-ii leetcode/editor/cn/213-house-robber-ii.cpp)
 add_executable(337-house-robber-iii leetcode/editor/cn/337-house-robber-iii.cpp)
 
 add_executable(122-best-time-to-buy-and-sell-stock-ii leetcode/editor/cn/122-best-time-to-buy-and-sell-stock-ii.cpp)
+add_executable(123-best-time-to-buy-and-sell-stock-iii leetcode/editor/cn/123-best-time-to-buy-and-sell-stock-iii.cpp)
