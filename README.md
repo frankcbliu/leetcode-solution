@@ -71,8 +71,8 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ### 子序列/子数组篇
 
-- [ ] 300-最长递增子序列
-- [ ] 674-最长连续递增序列
+- [x] [300-最长递增子序列](./leetcode/editor/cn/300-longest-increasing-subsequence.cpp)
+- [x] [674-最长连续递增序列](./leetcode/editor/cn/674-longest-continuous-increasing-subsequence.cpp)
 - [ ] 718-最长重复子数组
 - [ ] 1143-最长公共子序列
 - [ ] 1035.不相交的线
@@ -82,6 +82,10 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [ ] 72-编辑距离
 - [ ] 647-回文子串
 - [ ] 516-最长回文子序列
+
+## 2.贪心算法
+- [ ] 455-分发饼干
+- [ ] 376-摆动序列
 
 ## 2.回溯法
 

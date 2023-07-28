@@ -23,6 +23,6 @@ add_executable(322-coin-change leetcode/editor/cn/322-coin-change.cpp)
 add_executable(139-word-break leetcode/editor/cn/139-word-break.cpp)
 add_executable(213-house-robber-ii leetcode/editor/cn/213-house-robber-ii.cpp)
 add_executable(337-house-robber-iii leetcode/editor/cn/337-house-robber-iii.cpp)
-
 add_executable(122-best-time-to-buy-and-sell-stock-ii leetcode/editor/cn/122-best-time-to-buy-and-sell-stock-ii.cpp)
 add_executable(123-best-time-to-buy-and-sell-stock-iii leetcode/editor/cn/123-best-time-to-buy-and-sell-stock-iii.cpp)
+add_executable(300-longest-increasing-subsequence leetcode/editor/cn/300-longest-increasing-subsequence.cpp)
