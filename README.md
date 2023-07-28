@@ -85,9 +85,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ## 2.贪心算法
 - [ ] 455-分发饼干
-- [ ] 376-摆动序列
+- [ ] [376-摆动序列](./leetcode/editor/cn/376-wiggle-subsequence.cpp)
 
-## 2.回溯法
+## 3.回溯法
 
 - [ ] 980-不同路径III
 
@@ -99,7 +99,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ### 动态规划篇(先按分数排序, 刷完后再分类)
 
-- [ ] 2320-统计放置房子的方式数
+- [x] [2320-统计放置房子的方式数](./leetcode/editor/cn/2320-count-number-of-ways-to-place-houses.cpp)
 - [ ] 2140-解决智力问题
 - [ ] 2321-拼接数组的最大分数
 - [ ] 2266-统计打字方案数
