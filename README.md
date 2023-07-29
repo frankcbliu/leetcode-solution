@@ -100,7 +100,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 ### 动态规划篇(先按分数排序, 刷完后再分类)
 
 - [x] [2320-统计放置房子的方式数](./leetcode/editor/cn/2320-count-number-of-ways-to-place-houses.cpp)
-- [ ] 2140-解决智力问题
+- [x] [2140-解决智力问题](./leetcode/editor/cn/2140-solving-questions-with-brainpower.cpp)
 - [ ] 2321-拼接数组的最大分数
 - [ ] 2266-统计打字方案数
 - [ ] 2305-公平分发饼干
