@@ -98,6 +98,15 @@ int maxIncreasingGroups(vector<int> &usageLimits) {
     return left;
 }
 
+// https://leetcode.cn/problems/number-of-employees-who-met-the-target/
+int numberOfEmployeesWhoMetTarget(vector<int>& hours, int target) {
+    int cnt = 0;
+    for (const auto &item: hours)
+        if (item >= target)
+            cnt++;
+    return cnt;
+}
+
 int main() {
     vector<int> arr{8, 50, 65, 85, 8, 73, 55, 50, 29, 95, 5, 68, 52, 79};
     long long res = maxScore(arr, 74);
