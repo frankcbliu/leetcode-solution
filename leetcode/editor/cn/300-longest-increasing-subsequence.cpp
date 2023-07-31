@@ -63,7 +63,7 @@ public:
                 if (nums[j] < nums[i])
                     dp[i] = max(dp[i], dp[j] + 1);
             }
-            if (dp[i] > res) res = dp[i];
+            res = max(res, dp[i]);
         }
         return res;
     }

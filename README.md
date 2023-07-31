@@ -73,7 +73,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 - [x] [300-最长递增子序列](./leetcode/editor/cn/300-longest-increasing-subsequence.cpp)
 - [x] [674-最长连续递增序列](./leetcode/editor/cn/674-longest-continuous-increasing-subsequence.cpp)
-- [ ] 718-最长重复子数组
+- [x] [718-最长重复子数组](./leetcode/editor/cn/718-maximum-length-of-repeated-subarray.cpp)
 - [ ] 1143-最长公共子序列
 - [ ] 1035.不相交的线
 - [ ] 53-最大子序和
