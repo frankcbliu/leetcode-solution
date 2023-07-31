@@ -64,30 +64,35 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
 public:
-    int max_res(vector<vector<int>> &dp, vector<int> &nums1, vector<int> &nums2) {
-        int n = dp.size();
-        dp[0][0] = nums1[0];
-        dp[0][1] = nums2[0];
-        dp[0][2] = nums1[0];
+    int maxDiff(vector<int> &nums1, vector<int> &nums2) {
+        int n = nums1.size();
+        // 做差后，等价于算最大子数组和
+        vector<int> dp(n, nums2[0] - nums1[0]);
+        // 1. dp[i] = 选中 i 的最大子数组和
+        // 2. dp[i] = max(dp[i-1] + diff[i], diff[i]);
+        // 3. 初始化
+        // res = dp[0] = diff[0]
+        int res = nums2[0] - nums1[0];
         for (int i = 1; i < n; ++i) {
-            dp[i][0] = dp[i - 1][0] + nums1[1];
-            dp[i][1] = max(dp[i - 1][0], dp[i - 1][1]) + nums2[i];
-            dp[i][2] = max(dp[i - 1][1], dp[i - 1][2]) + nums1[i];
+            int diff = nums2[i] - nums1[i];
+            dp[i] = max(dp[i - 1] + diff, diff);
+            res = max(res, dp[i]);
         }
-        return *max_element(dp[n - 1].begin(), dp[n - 1].end());
+        return res;
+    }
+
+    int sum(vector<int> &nums) {
+        int res = 0;
+        for (auto i: nums) {
+            res += i;
+        }
+        return res;
     }
 
     int maximumsSplicedArray(vector<int> &nums1, vector<int> &nums2) {
-        vector<vector<int>> dp(nums1.size(), vector<int>(3, 0));
-        // 先假设拿 nums1
-        // 1. dp[i][j]: 长度为 n 的数组
-        //              j=0: 取数组a, j=1: 取数组b, j=2: 取数组a
-        // 2.
-        //    dp[i][0] = dp[i-1][0] + nums1[1]
-        //    dp[i][1] = max(dp[i-1][0], dp[i-1][1]) + nums2[i]
-        //    dp[i][2] = max(dp[i-1][1], dp[i-1][2]) + nums2[i]
-        // 3. 初始化
-        return max(max_res(dp, nums1, nums2), max_res(dp, nums2, nums1));
+        // 用 nums2 对 nums1 做差，然后算差值的最大值，加到 num1 的和上
+        // 然后反过来再算一次，求两次计算的最大值即可
+        return max(maxDiff(nums1, nums2) + sum(nums1), maxDiff(nums2, nums1) + sum(nums2));
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
@@ -99,7 +104,11 @@ int main() {
     vector<int> arr2 = {10, 90, 10};
     cout << s.maximumsSplicedArray(arr1, arr2) << endl;
     cout << s.maximumsSplicedArray(arr2, arr1) << endl;
+    assert(210 == s.maximumsSplicedArray(arr1, arr2));
+    assert(210 == s.maximumsSplicedArray(arr1, arr2));
+
     arr1 = {3, 4, 5, 1, 1, 1, 3, 4, 5, 1, 1, 1};
     arr2 = {1, 1, 1, 3, 4, 5, 1, 1, 1, 3, 4, 5};
     cout << s.maximumsSplicedArray(arr1, arr2) << endl;
+    assert(39 == s.maximumsSplicedArray(arr1, arr2));
 }

@@ -74,9 +74,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [300-最长递增子序列](./leetcode/editor/cn/300-longest-increasing-subsequence.cpp)
 - [x] [674-最长连续递增序列](./leetcode/editor/cn/674-longest-continuous-increasing-subsequence.cpp)
 - [x] [718-最长重复子数组](./leetcode/editor/cn/718-maximum-length-of-repeated-subarray.cpp)
-- [ ] 1143-最长公共子序列
-- [ ] 1035.不相交的线
-- [ ] 53-最大子序和
+- [x] [1143-最长公共子序列](./leetcode/editor/cn/1143-longest-common-subsequence.cpp)
+- [x] [1035.不相交的线](./leetcode/editor/cn/1035-uncrossed-lines.cpp)
+- [x] [53-最大子序和](./leetcode/editor/cn/53-maximum-subarray.cpp)
 - [ ] 115-不同的子序列
 - [ ] 583-两个字符串的删除操作
 - [ ] 72-编辑距离
@@ -84,6 +84,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [ ] 516-最长回文子序列
 
 ## 2.贪心算法
+
 - [ ] 455-分发饼干
 - [ ] [376-摆动序列](./leetcode/editor/cn/376-wiggle-subsequence.cpp)
 
@@ -101,7 +102,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 - [x] [2320-统计放置房子的方式数](./leetcode/editor/cn/2320-count-number-of-ways-to-place-houses.cpp)
 - [x] [2140-解决智力问题](./leetcode/editor/cn/2140-solving-questions-with-brainpower.cpp)
-- [ ] 2321-拼接数组的最大分数
+- [x] [2321-拼接数组的最大分数](./leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
 - [ ] 2266-统计打字方案数
 - [ ] 2305-公平分发饼干
 
