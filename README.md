@@ -76,8 +76,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [718-最长重复子数组](./leetcode/editor/cn/718-maximum-length-of-repeated-subarray.cpp)
 - [x] [1143-最长公共子序列](./leetcode/editor/cn/1143-longest-common-subsequence.cpp)
 - [x] [1035.不相交的线](./leetcode/editor/cn/1035-uncrossed-lines.cpp)
-- [x] [53-最大子序和](./leetcode/editor/cn/53-maximum-subarray.cpp)
-- [ ] 115-不同的子序列
+- [x] [53-最大子数组和](./leetcode/editor/cn/53-maximum-subarray.cpp)
+- [x] [392-判断子序列](./leetcode/editor/cn/392-is-subsequence.cpp)
+- [x] [115-不同的子序列](./leetcode/editor/cn/115-distinct-subsequences.cpp)
 - [ ] 583-两个字符串的删除操作
 - [ ] 72-编辑距离
 - [ ] 647-回文子串
