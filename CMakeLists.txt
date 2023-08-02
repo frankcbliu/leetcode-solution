@@ -13,3 +13,4 @@ add_executable(2320-count-number-of-ways-to-place-houses leetcode/editor/cn/2320
 add_executable(2140-solving-questions-with-brainpower leetcode/editor/cn/2140-solving-questions-with-brainpower.cpp)
 add_executable(2321-maximum-score-of-spliced-array leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
 add_executable(1143-longest-common-subsequence leetcode/editor/cn/1143-longest-common-subsequence.cpp)
+add_executable(583-delete-operation-for-two-strings leetcode/editor/cn/583-delete-operation-for-two-strings.cpp)

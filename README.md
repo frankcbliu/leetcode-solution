@@ -79,8 +79,8 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [53-最大子数组和](./leetcode/editor/cn/53-maximum-subarray.cpp)
 - [x] [392-判断子序列](./leetcode/editor/cn/392-is-subsequence.cpp)
 - [x] [115-不同的子序列](./leetcode/editor/cn/115-distinct-subsequences.cpp)
-- [ ] 583-两个字符串的删除操作
-- [ ] 72-编辑距离
+- [x] [583-两个字符串的删除操作](./leetcode/editor/cn/583-delete-operation-for-two-strings.cpp)
+- [x] [72-编辑距离](./leetcode/editor/cn/72-edit-distance.cpp)
 - [ ] 647-回文子串
 - [ ] 516-最长回文子序列
 
