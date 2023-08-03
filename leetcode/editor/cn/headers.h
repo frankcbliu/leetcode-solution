@@ -89,7 +89,8 @@ void showVector(vector<int> arr) {
 }
 
 // 遍历输出二维数组数组
-void showVector2(vector<vector<int>> arr) {
+template<typename T>
+void showVector2(vector<vector<T>> arr) {
     for (int i = 0; i < arr.size(); ++i) {
         for (int j = 0; j < arr[i].size(); ++j) {
             cout << arr[i][j] << " ";

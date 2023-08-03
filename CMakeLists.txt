@@ -14,3 +14,5 @@ add_executable(2140-solving-questions-with-brainpower leetcode/editor/cn/2140-so
 add_executable(2321-maximum-score-of-spliced-array leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
 add_executable(1143-longest-common-subsequence leetcode/editor/cn/1143-longest-common-subsequence.cpp)
 add_executable(583-delete-operation-for-two-strings leetcode/editor/cn/583-delete-operation-for-two-strings.cpp)
+add_executable(647-palindromic-substrings leetcode/editor/cn/647-palindromic-substrings.cpp)
+add_executable(516-longest-palindromic-subsequence leetcode/editor/cn/516-longest-palindromic-subsequence.cpp)

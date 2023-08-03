@@ -81,8 +81,8 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [115-不同的子序列](./leetcode/editor/cn/115-distinct-subsequences.cpp)
 - [x] [583-两个字符串的删除操作](./leetcode/editor/cn/583-delete-operation-for-two-strings.cpp)
 - [x] [72-编辑距离](./leetcode/editor/cn/72-edit-distance.cpp)
-- [ ] 647-回文子串
-- [ ] 516-最长回文子序列
+- [x] [647-回文子串](./leetcode/editor/cn/647-palindromic-substrings.cpp)
+- [x] [516-最长回文子序列](./leetcode/editor/cn/516-longest-palindromic-subsequence.cpp)
 
 ## 2.贪心算法
 
@@ -106,6 +106,17 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [2321-拼接数组的最大分数](./leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
 - [ ] 2266-统计打字方案数
 - [ ] 2305-公平分发饼干
+- [ ] 2262-字符串的总引力
+- [ ] 2318-不同骰子序列的数目
+- [ ] 2209-用地毯覆盖后的最少白色砖块
+- [ ] 2246-相邻字符不同的最长路径
+- [ ] 2218-从栈中取出 K 个硬币的最大面值和
+- [ ] 2167-移除所有载有违禁货物车厢所需的最少时间
+- [ ] 2188-完成比赛的最少时间
+- [ ] 2312-卖木头块
+- [ ] 2172-数组的最大与和
+- [ ] 2272-最大波动的子字符串
+- [ ] LCP 53-守护太空城
 
 ## 待刷题单:
 
