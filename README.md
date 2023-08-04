@@ -104,7 +104,8 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [2320-统计放置房子的方式数](./leetcode/editor/cn/2320-count-number-of-ways-to-place-houses.cpp)
 - [x] [2140-解决智力问题](./leetcode/editor/cn/2140-solving-questions-with-brainpower.cpp)
 - [x] [2321-拼接数组的最大分数](./leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
-- [ ] 2266-统计打字方案数
+- [x] [2266-统计打字方案数](./leetcode/editor/cn/2266-count-number-of-texts.cpp)
+  - 不太直观的动态规划题
 - [ ] 2305-公平分发饼干
 - [ ] 2262-字符串的总引力
 - [ ] 2318-不同骰子序列的数目

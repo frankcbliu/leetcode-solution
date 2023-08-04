@@ -16,3 +16,4 @@ add_executable(1143-longest-common-subsequence leetcode/editor/cn/1143-longest-c
 add_executable(583-delete-operation-for-two-strings leetcode/editor/cn/583-delete-operation-for-two-strings.cpp)
 add_executable(647-palindromic-substrings leetcode/editor/cn/647-palindromic-substrings.cpp)
 add_executable(516-longest-palindromic-subsequence leetcode/editor/cn/516-longest-palindromic-subsequence.cpp)
+add_executable(2266-count-number-of-texts leetcode/editor/cn/2266-count-number-of-texts.cpp)
