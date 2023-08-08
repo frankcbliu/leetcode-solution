@@ -5,13 +5,13 @@
 #ifndef LEETCODE_HEADERS_H
 #define LEETCODE_HEADERS_H
 
+#include <algorithm>
 #include <iostream>
 #include <queue>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -112,6 +112,12 @@ void showListNode(ListNode *list) {
 
 void showListNode(ListNode list) {
     showListNode(&list);
+}
+
+// 把整型转为二进制
+std::string int_to_bit_str(int i) {
+    std::bitset<8> bits(i);
+    return bits.to_string();
 }
 
 #endif//LEETCODE_HEADERS_H

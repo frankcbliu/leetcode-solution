@@ -50,31 +50,40 @@ class Solution {
 public:
     int distributeCookies(vector<int> &cookies, int k) {
         int n = cookies.size();
-        int m = int(pow(2, n + 1)) - 1;
-        vector<vector<int>> dp(k + 1, vector<int>(m + 1, 0x7f7f7f));// TODO: 为什么要初始化成最大值?
+        int m = (1 << n) - 1;
+        vector<vector<int>> dp(k + 1, vector<int>(m + 1, 0x7f7f7f));// 初始化成 inf
         // 1. dp[i][j]: i 是第i个人，j 是孩子分配到的饼干的数量和的二进制标识, dp[i][j] 是此时的不公平程度。
         //    假设 8 个小孩: j = 0000 0001 为最后一位小孩分到了饼干
         // 2. 假设第 i 个小朋友分到的饼干是 p, 这 p 个饼干之和是 g[p]。 前 i 个小朋友的饼干之和是 j, 求最小最大值。
-        // dp[i][j] = min(dp[i][j],
+        // dp[i][j] = min(dp[i][j], // 最外层是求最小值，因此 dp 应该初始化成 inf
         //                max(dp[i-1][j-p], // 前 i-1 个小朋友的最小不公平程度
         //                    g[p])); // 第 i 个小朋友的不公平程度
-        // 3. 初始化
-        vector<int> g(m + 1, 0);// 饼干分配的可能性
-        for (int i = 0; i <= m; ++i) {
-            int t = i;
-            for (int j = 1; j <= n && t > 0; j++) {
-                if (t & 1) {
-                    g[i] += cookies[n - j];
-                }
-                t = (t >> 1);
+        // 3. 初始化 TODO: 子集求和初始化解释
+        vector<int> sum(m + 1, 0);   // 饼干分配的可能性
+        for (int i = 0; i < n; ++i) {// 遍历n个饼干
+            cout << "i = " << i << endl;
+            cout << int_to_bit_str(1 << i) << endl;
+            for (int j = 0, bit = 1 << i; j < bit; ++j) {// j ~ bit, 等于前i个的饼干的子集
+                cout << int_to_bit_str(j | bit) << " " << int_to_bit_str(j) << endl;
+                cout << "sum[" << (j | bit) << "] = sum[" << j << "] + cookies[" << i << "]" << endl;
+                sum[j | bit] = sum[j] + cookies[i];
             }
         }
+        //        for (int i = 0; i <= m; ++i) {
+        //            int t = i;
+        //            for (int j = 1; j <= n && t > 0; j++) {
+        //                if (t & 1) {
+        //                    sum[i] += cookies[n - j];
+        //                }
+        //                t = (t >> 1);
+        //            }
+        //        }
         dp[0][0] = 0;// TODO: 为什么只需要初始化这个?  (0 个人，必然是 0)
         // 4. 遍历顺序
         for (int i = 1; i <= k; ++i) {
             for (int j = 0; j <= m; ++j) {                // 已经分配的饼干
-                for (int p = j; p != 0; p = (p - 1) & j) {// TODO: p = (p-1)&j  这是什么遍历顺序?
-                    dp[i][j] = min(dp[i][j], max(dp[i - 1][j - p], g[p]));
+                for (int p = j; p != 0; p = (p - 1) & j) {// p = (p-1)&j  遍历子集
+                    dp[i][j] = min(dp[i][j], max(dp[i - 1][j - p], sum[p]));
                 }
             }
         }
@@ -82,6 +91,15 @@ public:
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
+
+
+void show_bit_change() {
+    int j = 21;
+    cout << int_to_bit_str(j) << endl;
+    for (int p = j; p != 0; p = (p - 1) & j) {
+        cout << int_to_bit_str(p) << endl;
+    }
+}
 
 
 int main() {
