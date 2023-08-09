@@ -61,11 +61,11 @@ public:
         // 3. 初始化 TODO: 子集求和初始化解释
         vector<int> sum(m + 1, 0);   // 饼干分配的可能性
         for (int i = 0; i < n; ++i) {// 遍历n个饼干
-            cout << "i = " << i << endl;
-            cout << int_to_bit_str(1 << i) << endl;
+//            cout << "i = " << i << endl;
+//            cout << int_to_bit_str(1 << i) << endl;
             for (int j = 0, bit = 1 << i; j < bit; ++j) {// j ~ bit, 等于前i个的饼干的子集
-                cout << int_to_bit_str(j | bit) << " " << int_to_bit_str(j) << endl;
-                cout << "sum[" << (j | bit) << "] = sum[" << j << "] + cookies[" << i << "]" << endl;
+//                cout << int_to_bit_str(j | bit) << " " << int_to_bit_str(j) << endl;
+//                cout << "sum[" << (j | bit) << "] = sum[" << j << "] + cookies[" << i << "]" << endl;
                 sum[j | bit] = sum[j] + cookies[i];
             }
         }
