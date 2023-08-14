@@ -106,7 +106,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [2321-拼接数组的最大分数](./leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
 - [x] [2266-统计打字方案数](./leetcode/editor/cn/2266-count-number-of-texts.cpp)
     - 不太直观的动态规划题
-- [ ] [2305-公平分发饼干(状压 DP)](./leetcode/editor/cn/2305-fair-distribution-of-cookies.cpp)
+- [x] [2305-公平分发饼干(状压 DP)](./leetcode/editor/cn/2305-fair-distribution-of-cookies.cpp)
 - [ ] 2262-字符串的总引力
 - [ ] 2318-不同骰子序列的数目
 - [ ] 2209-用地毯覆盖后的最少白色砖块
