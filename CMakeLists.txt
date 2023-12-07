@@ -19,3 +19,4 @@ add_executable(516-longest-palindromic-subsequence leetcode/editor/cn/516-longes
 add_executable(2266-count-number-of-texts leetcode/editor/cn/2266-count-number-of-texts.cpp)
 add_executable(2305-fair-distribution-of-cookies leetcode/editor/cn/2305-fair-distribution-of-cookies.cpp)
 add_executable(203-remove-linked-list-elements leetcode/editor/cn/203-remove-linked-list-elements.cpp)
+add_executable(707-design-linked-list leetcode/editor/cn/707-design-linked-list.cpp)
