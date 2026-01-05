@@ -1,22 +1,11 @@
-/**
-* 临时测试使用
-*/
-
+/*
+ * 临时测试使用
+ */
 #include <iostream>
 
-using namespace std;
-
-struct ListNode {
-    int val;
-    ListNode *next;
-    explicit ListNode(int val) : val(val), next(nullptr) {}
-};
-
 int main() {
-    ListNode head = ListNode(1);
-    head.next = new ListNode(2);
-
-    cout << head.val;
-    cout << head.next->val;
-    return 0;
+    int a = 42;
+    std::cout << "Size of int: " << sizeof(int) << std::endl;    // 输出 int 类型的大小
+    std::cout << "Size of a: " << sizeof(a) << std::endl;        // 输出变量 a 的大小
+    std::cout << "Size of double: " << sizeof(double) << std::endl; // 输出 double 类型的大小
 }
