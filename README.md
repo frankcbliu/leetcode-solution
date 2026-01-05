@@ -127,3 +127,10 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ## 5. 链表
 - [x] [203-移除链表元素](./leetcode/editor/cn/203-remove-linked-list-elements.cpp)
+
+## 6. 排序算法
+- [x] [冒泡排序](./sort/bubble_sort.cc)
+- [x] [选择排序](./sort/select_sort.cc)
+- [x] [插入排序](./sort/insert_sort.cc)
+- [] [归并排序](./sort/merge_sort.cc)
+

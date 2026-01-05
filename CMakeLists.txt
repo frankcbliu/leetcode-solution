@@ -20,3 +20,7 @@ add_executable(2266-count-number-of-texts leetcode/editor/cn/2266-count-number-o
 add_executable(2305-fair-distribution-of-cookies leetcode/editor/cn/2305-fair-distribution-of-cookies.cpp)
 add_executable(203-remove-linked-list-elements leetcode/editor/cn/203-remove-linked-list-elements.cpp)
 add_executable(707-design-linked-list leetcode/editor/cn/707-design-linked-list.cpp)
+add_executable(sort sort/main.cc sort/sort.h)
+add_executable(bubble_sort sort/bubble_sort.cc
+        sort/select_sort.cc
+        sort/insert_sort.cc)
