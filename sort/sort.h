@@ -18,7 +18,7 @@ void show_arr(const vector<int> &arr) {
 }
 
 void swap(vector<int> &arr, int i, int j) {
-//    cout << "swap: arr[" << i << "]" << arr[i] << " [" << j << "]" << arr[j] << endl;
+    if (i == j) return;
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;

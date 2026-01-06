@@ -132,5 +132,5 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [冒泡排序](./sort/bubble_sort.cc)
 - [x] [选择排序](./sort/select_sort.cc)
 - [x] [插入排序](./sort/insert_sort.cc)
-- [] [归并排序](./sort/merge_sort.cc)
+- [x] [归并排序](./sort/merge_sort.cc)
 

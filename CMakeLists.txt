@@ -23,4 +23,5 @@ add_executable(707-design-linked-list leetcode/editor/cn/707-design-linked-list.
 add_executable(sort sort/main.cc sort/sort.h)
 add_executable(bubble_sort sort/bubble_sort.cc
         sort/select_sort.cc
-        sort/insert_sort.cc)
+        sort/insert_sort.cc
+        sort/merge_sort.cc)
