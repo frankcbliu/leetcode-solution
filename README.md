@@ -134,6 +134,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [142-环形链表II](./leetcode/editor/cn/142-linked-list-cycle-ii.cpp)
 - [x] [160-相交链表](./leetcode/editor/cn/160-intersection-of-two-linked-lists.cpp)
 - [x] [21-合并两个有序链表](./leetcode/editor/cn/21-merge-two-sorted-lists.cpp)
+- [ ] [链表求和](./leetcode/editor/cn/面试题%2002.05-sum-lists-lcci.cpp)
+- [ ] [234-回文链表](./leetcode/editor/cn/234-palindrome-linked-list.cpp)
+- [ ] [138-随机链表的复制](./leetcode/editor/cn/138-copy-list-with-random-pointer.cpp)
 
 ## 6. 排序算法
 - [x] [冒泡排序](./sort/bubble_sort.cc)
