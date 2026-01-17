@@ -1,0 +1,385 @@
+## 前置知识
+
+- [876. 链表的中间结点](https://leetcode.cn/problems/middle-of-the-linked-list/)，[视频讲解【基础算法精讲 07】](https://www.bilibili.com/video/BV1KG4y1G7cu/)
+- [206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)，[视频讲解【基础算法精讲 06】](https://www.bilibili.com/video/BV1sd4y1x7KN/)
+
+## 思路
+
+回想一下，怎么判断一个字符串是不是回文串？我们可以从最左最右开始，比较第一个字母和最后一个字母是不是一样的，一样的话，就继续比较第二个字母和倒数第二个字母，依此类推。
+
+但对于链表，如何快速找到最后一个节点、倒数第二个节点、倒数第三个节点……？
+
+首先，找链表的中间节点：
+
+- 如果链表有奇数个节点，找正中间的节点。![lc-midlist1.jpg](https://pic.leetcode.cn/1729048747-htsJVo-lc-midlist1.jpg)
+- 如果链表有偶数个节点，找正中间右边的节点。![lc-midlist2.jpg](https://pic.leetcode.cn/1729048754-HLNfqE-lc-midlist2.jpg)
+
+然后，把中间节点到链表末尾反转。如上图，反转后得到链表 $6\to 5\to 4$，其头节点记作 $\textit{head}_2$。这样我们就能从 $\textit{head}_2$ 开始，依次访问原链表的最后一个节点、倒数第二个节点、倒数第三个节点……
+
+最后，同时遍历 $\textit{head}$ 和 $\textit{head}_2$ 这两个链表，每次循环判断 $\textit{head}.\textit{val}$ 是否等于 $\textit{head}_2.\textit{val}$，若不相等，则返回 $\texttt{false}$。循环直到 $\textit{head}_2$ 链表遍历结束。如果循环中没有返回 $\texttt{false}$，说明链表是回文的，返回 $\texttt{true}$。
+
+⚠**注意**：第一张图中的 $2\to 3$，在反转链表后，并不会断开。第一张图反转链表后，我们得到了两条链表，一条是 $1\to 2\to 3$，另一条是 $5\to 4\to 3$。
+
+⚠**注意**：第二张图中的 $3\to 4$，在反转链表后，并不会断开。第二张图反转链表后，我们得到了两条链表，一条是 $1\to 2\to 3\to 4$，另一条是 $6\to 5\to 4$。这意味着下面代码在写循环的时候，循环条件要判断 $\textit{head}_2$ 是否为空而不是 $\textit{head}$ 是否为空。如果判断 $\textit{head}$ 是否为空，会错误地多循环一次，导致访问 `head2.val` 出现空指针异常。
+
+## 答疑
+
+**问**：为什么不能反转整个链表，这样也可以访问原链表的最后一个节点、倒数第二个节点、倒数第三个节点……呀？
+
+**答**：注意我们还要从 $\textit{head}$ 开始遍历链表，访问原链表的第一个节点、第二个节点、第三个节点……如果反转整个链表，链表前半段的结构就被破坏了。
+
+下面的代码修改了输入的链表。复原输入的写法参考【Python3 写法二】。
+
+* [sol-Python3]
+
+```py
+class Solution:
+    # 876. 链表的中间结点
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+    # 206. 反转链表
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pre, cur = None, head
+        while cur:
+            nxt = cur.next
+            cur.next = pre
+            pre = cur
+            cur = nxt
+        return pre
+
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        mid = self.middleNode(head)
+        head2 = self.reverseList(mid)
+        while head2:
+            if head.val != head2.val:  # 不是回文链表
+                return False
+            head = head.next
+            head2 = head2.next
+        return True
+```
+
+* [sol-Python3写法二]
+
+```py
+class Solution:
+    # 876. 链表的中间结点
+    # 额外返回中间结点的前一个节点，方便复原
+    def middleNode(self, head: Optional[ListNode]) -> Tuple[Optional[ListNode], Optional[ListNode]]:
+        slow = fast = head
+        pre = None
+        while fast and fast.next:
+            pre = slow
+            slow = slow.next
+            fast = fast.next.next
+        return pre, slow
+
+    # 206. 反转链表
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pre, cur = None, head
+        while cur:
+            nxt = cur.next
+            cur.next = pre
+            pre = cur
+            cur = nxt
+        return pre
+
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        if head.next is None:
+            return True
+
+        pre, mid = self.middleNode(head)
+        head2 = h = self.reverseList(mid)
+        is_pal = True
+        while head2:
+            if head.val != head2.val:  # 不是回文链表
+                is_pal = False
+                break
+            head = head.next
+            head2 = head2.next
+
+        # 复原
+        pre.next = self.reverseList(h)
+        return is_pal
+```
+
+* [sol-Java]
+
+```java
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode mid = middleNode(head);
+        ListNode head2 = reverseList(mid);
+        while (head2 != null) {
+            if (head.val != head2.val) { // 不是回文链表
+                return false;
+            }
+            head = head.next;
+            head2 = head2.next;
+        }
+        return true;
+    }
+
+    // 876. 链表的中间结点
+    private ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    // 206. 反转链表
+    private ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
+}
+```
+
+* [sol-C++]
+
+```cpp
+class Solution {
+    // 876. 链表的中间结点
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slow = head, *fast = head;
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+
+    // 206. 反转链表
+    ListNode* reverseList(ListNode* head) {
+        ListNode* pre = nullptr, *cur = head;
+        while (cur) {
+            ListNode* nxt = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
+
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode* mid = middleNode(head);
+        ListNode* head2 = reverseList(mid);
+        while (head2) {
+            if (head->val != head2->val) { // 不是回文链表
+                return false;
+            }
+            head = head->next;
+            head2 = head2->next;
+        }
+        return true;
+    }
+};
+```
+
+* [sol-C]
+
+```c
+// 876. 链表的中间结点
+struct ListNode* middleNode(struct ListNode* head) {
+    struct ListNode *slow = head, *fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+// 206. 反转链表
+struct ListNode* reverseList(struct ListNode* head) {
+    struct ListNode *pre = NULL, *cur = head;
+    while (cur) {
+        struct ListNode* nxt = cur->next;
+        cur->next = pre;
+        pre = cur;
+        cur = nxt;
+    }
+    return pre;
+}
+
+bool isPalindrome(struct ListNode* head) {
+    struct ListNode* mid = middleNode(head);
+    struct ListNode* head2 = reverseList(mid);
+    while (head2) {
+        if (head->val != head2->val) { // 不是回文链表
+            return false;
+        }
+        head = head->next;
+        head2 = head2->next;
+    }
+    return true;
+}
+```
+
+* [sol-Go]
+
+```go
+// 876. 链表的中间结点
+func middleNode(head *ListNode) *ListNode {
+    slow, fast := head, head
+    for fast != nil && fast.Next != nil {
+        slow = slow.Next
+        fast = fast.Next.Next
+    }
+    return slow
+}
+
+// 206. 反转链表
+func reverseList(head *ListNode) *ListNode {
+    var pre, cur *ListNode = nil, head
+    for cur != nil {
+        nxt := cur.Next
+        cur.Next = pre
+        pre = cur
+        cur = nxt
+    }
+    return pre
+}
+
+func isPalindrome(head *ListNode) bool {
+    mid := middleNode(head)
+    head2 := reverseList(mid)
+    for head2 != nil {
+        if head.Val != head2.Val { // 不是回文链表
+            return false
+        }
+        head = head.Next
+        head2 = head2.Next
+    }
+    return true
+}
+```
+
+* [sol-JavaScript]
+
+```js
+// 876. 链表的中间结点
+function middleNode(head) {
+    let slow = head, fast = head;
+    while (fast !== null && fast.next !== null) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
+
+// 206. 反转链表
+function reverseList(head) {
+    let pre = null, cur = head;
+    while (cur !== null) {
+        const nxt = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = nxt;
+    }
+    return pre;
+}
+
+var isPalindrome = function(head) {
+    const mid = middleNode(head);
+    let head2 = reverseList(mid);
+    while (head2 !== null) {
+        if (head.val !== head2.val) { // 不是回文链表
+            return false;
+        }
+        head = head.next;
+        head2 = head2.next;
+    }
+    return true;
+};
+```
+
+* [sol-Rust]
+
+```rust
+impl Solution {
+    // 876. 链表的中间结点
+    fn middle_node(head: &Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut fast = head;
+        let mut slow = head;
+        while fast.is_some() && fast.as_ref()?.next.is_some() {
+            slow = &slow.as_ref()?.next;
+            fast = &fast.as_ref()?.next.as_ref()?.next;
+        }
+        // 把 slow 从 &Option<Box<ListNode>> 强转成 &mut Option<Box<ListNode>>
+        #[allow(mutable_transmutes)]
+        let slow: &mut Option<Box<ListNode>> = unsafe { std::mem::transmute(slow) };
+        slow.take() // 避免 clone()
+    }
+
+    // 206. 反转链表
+    fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+        let mut pre = None;
+        let mut cur = head;
+        while let Some(mut node) = cur {
+            let nxt = node.next;
+            node.next = pre;
+            pre = Some(node);
+            cur = nxt;
+        }
+        pre
+    }
+
+    pub fn is_palindrome(mut head: Option<Box<ListNode>>) -> bool {
+        // 由于 Self::middle_node 把中间节点 take 出来了，所以反转后 head2 的长度 >= head 的长度
+        let mid = Self::middle_node(&head);
+        let mut head2 = Self::reverse_list(mid);
+        while head.is_some() { // head 更短，应判断 head 是否为空
+            if head.as_ref().unwrap().val != head2.as_ref().unwrap().val {
+                return false;
+            }
+            head = head.unwrap().next;
+            head2 = head2.unwrap().next;
+        }
+        true
+    }
+}
+```
+
+#### 复杂度分析
+
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 是链表的长度（节点个数）。
+- 空间复杂度：$\mathcal{O}(1)$。
+
+更多相似题目，见下面的链表题单。其中和本题最为相似的是 [143. 重排链表](https://leetcode.cn/problems/reorder-list/)。
+
+## 分类题单
+
+[如何科学刷题？](https://leetcode.cn/circle/discuss/RvFUtj/)
+
+1. [滑动窗口与双指针（定长/不定长/单序列/双序列/三指针/分组循环）](https://leetcode.cn/circle/discuss/0viNMK/)
+2. [二分算法（二分答案/最小化最大值/最大化最小值/第K小）](https://leetcode.cn/circle/discuss/SqopEo/)
+3. [单调栈（基础/矩形面积/贡献法/最小字典序）](https://leetcode.cn/circle/discuss/9oZFK9/)
+4. [网格图（DFS/BFS/综合应用）](https://leetcode.cn/circle/discuss/YiXPXW/)
+5. [位运算（基础/性质/拆位/试填/恒等式/思维）](https://leetcode.cn/circle/discuss/dHn9Vk/)
+6. [图论算法（DFS/BFS/拓扑排序/最短路/最小生成树/二分图/基环树/欧拉路径）](https://leetcode.cn/circle/discuss/01LUak/)
+7. [动态规划（入门/背包/状态机/划分/区间/状压/数位/数据结构优化/树形/博弈/概率期望）](https://leetcode.cn/circle/discuss/tXLS3i/)
+8. [常用数据结构（前缀和/差分/栈/队列/堆/字典树/并查集/树状数组/线段树）](https://leetcode.cn/circle/discuss/mOr1u6/)
+9. [数学算法（数论/组合/概率期望/博弈/计算几何/随机算法）](https://leetcode.cn/circle/discuss/IYT3ss/)
+10. [贪心与思维（基本贪心策略/反悔/区间/字典序/数学/思维/脑筋急转弯/构造）](https://leetcode.cn/circle/discuss/g6KTKL/)
+11. [链表、二叉树与回溯（前后指针/快慢指针/DFS/BFS/直径/LCA/一般树）](https://leetcode.cn/circle/discuss/K0n2gO/)
+12. [字符串（KMP/Z函数/Manacher/字符串哈希/AC自动机/后缀数组/子序列自动机）](https://leetcode.cn/circle/discuss/SJFwQI/)
+
+[我的题解精选（已分类）](https://github.com/EndlessCheng/codeforces-go/blob/master/leetcode/SOLUTIONS.md)
+
+欢迎关注 [B站@灵茶山艾府](https://space.bilibili.com/206214)

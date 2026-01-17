@@ -1,0 +1,52 @@
+### 解题思路
+
+设置carry为当前递归的进位信号
+共有三种情况：
+1. 如果两个链表都不为空，则以l1为根节点，更新其值，并且让该节点的next节点（高位数节点）为下次递归返回值，再返回当前节点作为上一个节点（低位节点）的next节点。
+2. 如果有一个链表为空，这里假设l2为空。如果递归时，低位节点不存在进位情况，则直接返回l1即可，如果存在进位，就更新l1节点值，并且如果更新l1节点值导致还要继续进位，则继续递归下去。
+3. 如果链表全为空，如果此时还需要进位，就返回一个开辟的值为1的新节点，如果不需要进位，直接返回空指针。
+
+### 代码
+
+* cpp
+
+```cpp
+class Solution {
+    bool carry=0;//进位信号
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        if(l1&&l2)
+        {
+            l1->val+=l2->val+carry;     //更新l1值
+            carry=l1->val>9;            //更新进位信号
+            l1->val=l1->val%10;         //更新l1值
+            l1->next=addTwoNumbers(l1->next,l2->next);  //递归更新l1的下一个节点和l2的下一个节点
+            return l1;                  //返回更新过后的l1（后面的节点也已经递归更新）
+        }
+        else if(l1)
+        {
+            if(carry)             //如果存在进位
+            {
+                l1->val=(l1->val+1)%10; //更新l1值
+                carry=l1->val==0;       //更新进位信号
+                if(carry)  l1->next=addTwoNumbers(l1->next,l2); //如果该节点还要继续进位，则继续递归
+            }
+            return l1;                  //返回更新过后的l1（后面的节点也已经递归更新）
+        }
+        else if(l2)     return addTwoNumbers(l2,l1);    //转换为只有l1不为空的情况
+        else if(carry)  return new ListNode(1);      //如果l1和l2都为空且仍需进位，则返回开辟的新节点
+        else return nullptr;
+    }
+};
+```
+
+### 同类题目的类似解法
+
+2.两数相加
+同一题目题解链接：[两数相加题解](https://leetcode-cn.com/problems/add-two-numbers/solution/shuang-bai-di-gui-fa-si-lu-he-qi-ta-ren-n5koq/)
+
+445.两数相加II        
+类似题目题解链接：[两数相加 II题解](https://leetcode-cn.com/problems/add-two-numbers-ii/solution/shuang-bai-di-gui-fa-si-lu-he-qi-ta-ren-l6olu/)
+
+![QQ浏览器截图20210615071813.png](https://pic.leetcode-cn.com/1623713609-soLnYS-QQ%E6%B5%8F%E8%A7%88%E5%99%A8%E6%88%AA%E5%9B%BE20210615071813.png)
+

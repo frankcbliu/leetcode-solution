@@ -97,6 +97,38 @@ public:
         begin->next = right;
         return begin;
     }
+
+    // 解法2：灵府山
+    ListNode *reverseKGroup2(ListNode *head, int k) {
+        // 计算链表长度
+        int n = 0;
+        ListNode *cur = head;
+        while (cur != nullptr) {
+            n++;
+            cur = cur->next;
+        }
+        // 哨兵节点
+        ListNode dummy(0);
+        dummy.next = head;
+        ListNode *p0 = &dummy;
+        ListNode *pre = nullptr;
+        cur = p0->next;
+        // K个一组进行反转, 不足k个的不反转
+        while (n >= k) {
+            n -= k;
+            for (int i = 0; i < k; i++) {
+                ListNode *nxt = cur->next;
+                cur->next = pre;
+                pre = cur;
+                cur = nxt;
+            }
+            ListNode *nxt2 = p0->next;
+            p0->next->next = cur;
+            p0->next = pre;
+            p0 = nxt2;
+        }
+        return dummy.next;
+    }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 

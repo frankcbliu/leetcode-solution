@@ -60,13 +60,13 @@
 class Solution {
 public:
     ListNode *reverseList(ListNode *head) {
-        ListNode *pre = nullptr;
-        ListNode *cur = head;
+        ListNode* pre = nullptr;
+        ListNode* cur = head;
         while (cur != nullptr) {
-            ListNode *tmp = cur->next;
+            ListNode* nxt = cur->next;
             cur->next = pre;
             pre = cur;
-            cur = tmp;
+            cur = nxt;
         }
         return pre;
     }

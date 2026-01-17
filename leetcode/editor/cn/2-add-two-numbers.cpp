@@ -81,6 +81,65 @@ public:
       }
       return head->next;
     }
+
+    ListNode *addTwoNumbers2(ListNode *l1, ListNode *l2) {
+        ListNode *head = nullptr;
+        ListNode *tail = nullptr;
+        int carry = 0;
+        while (l1 || l2) {
+            int n1 = l1 ? l1->val : 0;
+            int n2 = l2 ? l2->val : 0;
+            int sum = n1 + n2 + carry;
+            if (!head) {
+                head = new ListNode(sum % 10);
+                tail = head;
+            } else {
+                tail->next = new ListNode(sum % 10);
+                tail = tail->next;
+            }
+            carry = sum / 10;
+            if (l1) l1 = l1->next;
+            if (l2) l2 = l2->next;
+        }
+        if (carry > 0) {
+            tail->next = new ListNode(carry);
+        }
+        return head;
+    }
+
+    ListNode* addNumbers3(ListNode* l1 , ListNode* l2) {
+        // 模拟法
+        ListNode* head = nullptr;
+        ListNode* tail = nullptr;
+
+        int carry = 0;
+        // 只要 l1 || l2 还有节点可用
+        while (l1 || l2) {
+            // l1 || l2 如果为空，节点值视为0
+            int n1 = l1 ? l1->val : 0;
+            int n2 = l2 ? l2->val : 0;
+            // 计算节点和 + 进位
+            int sum = n1  + n2 + carry;
+            // 创建新节点
+            if (head == nullptr) {
+                head = new ListNode(sum % 10);
+                tail = head;
+            } else {
+                tail->next = new ListNode(sum % 10);
+                tail = tail->next;
+            }
+            // 计算进位
+            carry = sum / 10;
+            // 更新节点位置
+            if (l1) l1 = l1->next;
+            if (l2) l2 = l2->next;
+        }
+        // 边界情况
+        if (carry > 0) {
+            tail->next = new ListNode(carry);
+        }
+        return head;
+    }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
@@ -91,12 +150,15 @@ int main() {
   ListNode* l1 = new ListNode({2, 4, 3});
   ListNode* l2 = new ListNode({5, 6, 4});
   showListNode(s.addTwoNumbers(l1, l2));
+  showListNode(s.addNumbers3(l1, l2));
 
   l1 = new ListNode({0});
   l2 = new ListNode({0});
   showListNode(s.addTwoNumbers(l1, l2));
+  showListNode(s.addNumbers3(l1, l2));
 
   l1 = new ListNode({9, 9, 9, 9, 9, 9, 9});
   l2 = new ListNode({9, 9, 9, 9});
   showListNode(s.addTwoNumbers(l1, l2));
+  showListNode(s.addNumbers3(l1, l2));
 }

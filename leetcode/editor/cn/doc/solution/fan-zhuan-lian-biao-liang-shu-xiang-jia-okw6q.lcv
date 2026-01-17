@@ -1,0 +1,437 @@
+## 前置知识
+
+- [2. 两数相加](https://leetcode.cn/problems/add-two-numbers/)，[动画讲解](https://leetcode.cn/problems/add-two-numbers/solution/dong-hua-jian-ji-xie-fa-cong-di-gui-dao-oe0di/)
+- [206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)，[视频讲解](https://www.bilibili.com/video/BV1sd4y1x7KN/)
+
+## 方法一：递归写法
+
+1. 反转链表 $l_1$。
+2. 反转链表 $l_2$。
+3. 调用 [2. 两数相加](https://leetcode.cn/problems/add-two-numbers/) 的代码，得到链表 $l_3$。
+4. 反转链表 $l_3$，返回 $l_3$ 作为答案。
+
+* [sol-Python3]
+
+```py
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return head
+        new_head = self.reverseList(head.next)
+        head.next.next = head  # 把下一个节点指向自己
+        head.next = None  # 断开指向下一个节点的连接，保证最终链表的末尾节点的 next 是空节点
+        return new_head
+
+    # l1 和 l2 为当前遍历的节点，carry 为进位
+    def addTwo(self, l1: Optional[ListNode], l2: Optional[ListNode], carry=0) -> Optional[ListNode]:
+        if l1 is None and l2 is None:  # 递归边界：l1 和 l2 都是空节点
+            return ListNode(carry) if carry else None  # 如果进位了，就额外创建一个节点
+        if l1 is None:  # 如果 l1 是空的，那么此时 l2 一定不是空节点
+            l1, l2 = l2, l1  # 交换 l1 与 l2，保证 l1 非空，从而简化代码
+        carry += l1.val + (l2.val if l2 else 0)  # 节点值和进位加在一起
+        l1.val = carry % 10  # 每个节点保存一个数位
+        l1.next = self.addTwo(l1.next, l2.next if l2 else None, carry // 10)  # 进位
+        return l1
+
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        l1 = self.reverseList(l1)
+        l2 = self.reverseList(l2)  # l1 和 l2 反转后，就变成【2. 两数相加】了
+        l3 = self.addTwo(l1, l2)
+        return self.reverseList(l3)
+```
+
+* [sol-Java]
+
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        l1 = reverseList(l1);
+        l2 = reverseList(l2); // l1 和 l2 反转后，就变成【2. 两数相加】了
+        ListNode l3 = addTwo(l1, l2, 0);
+        return reverseList(l3);
+    }
+
+    private ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head; // 把下一个节点指向自己
+        head.next = null; // 断开指向下一个节点的连接，保证最终链表的末尾节点的 next 是空节点
+        return newHead;
+    }
+
+    // l1 和 l2 为当前遍历的节点，carry 为进位
+    private ListNode addTwo(ListNode l1, ListNode l2, int carry) {
+        if (l1 == null && l2 == null) { // 递归边界：l1 和 l2 都是空节点
+            return carry != 0 ? new ListNode(carry) : null; // 如果进位了，就额外创建一个节点
+        }
+        if (l1 == null) { // 如果 l1 是空的，那么此时 l2 一定不是空节点
+            l1 = l2;
+            l2 = null; // 交换 l1 与 l2，保证 l1 非空，从而简化代码
+        }
+        carry += l1.val + (l2 != null ? l2.val : 0); // 节点值和进位加在一起
+        l1.val = carry % 10; // 每个节点保存一个数位
+        l1.next = addTwo(l1.next, (l2 != null ? l2.next : null), carry / 10); // 进位
+        return l1;
+    }
+}
+```
+
+* [sol-C++]
+
+```cpp
+class Solution {
+    ListNode* reverseList(ListNode* head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+        auto new_head = reverseList(head->next);
+        head->next->next = head; // 把下一个节点指向自己
+        head->next = nullptr; // 断开指向下一个节点的连接，保证最终链表的末尾节点的 next 是空节点
+        return new_head;
+    }
+
+    // l1 和 l2 为当前遍历的节点，carry 为进位
+    ListNode* addTwo(ListNode* l1, ListNode* l2, int carry = 0) {
+        if (l1 == nullptr && l2 == nullptr) { // 递归边界：l1 和 l2 都是空节点
+            return carry ? new ListNode(carry) : nullptr; // 如果进位了，就额外创建一个节点
+        }
+        if (l1 == nullptr) { // 如果 l1 是空的，那么此时 l2 一定不是空节点
+            swap(l1, l2); // 交换 l1 与 l2，保证 l1 非空，从而简化代码
+        }
+        carry += l1->val + (l2 ? l2->val : 0); // 节点值和进位加在一起
+        l1->val = carry % 10; // 每个节点保存一个数位
+        l1->next = addTwo(l1->next, (l2 ? l2->next : nullptr), carry / 10); // 进位
+        return l1;
+    }
+
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        l1 = reverseList(l1);
+        l2 = reverseList(l2); // l1 和 l2 反转后，就变成【2. 两数相加】了
+        auto l3 = addTwo(l1, l2);
+        return reverseList(l3);
+    }
+};
+```
+
+* [sol-Go]
+
+```go
+func reverseList(head *ListNode) *ListNode {
+    if head == nil || head.Next == nil {
+        return head
+    }
+    newHead := reverseList(head.Next)
+    head.Next.Next = head // 把下一个节点指向自己
+    head.Next = nil // 断开指向下一个节点的连接，保证最终链表的末尾节点的 next 是空节点
+    return newHead
+}
+
+// l1 和 l2 为当前遍历的节点，carry 为进位
+func addTwo(l1, l2 *ListNode, carry int) *ListNode {
+    if l1 == nil && l2 == nil { // 递归边界：l1 和 l2 都是空节点
+        if carry != 0 {
+            return &ListNode{Val: carry} // 如果进位了，就额外创建一个节点
+        }
+        return nil
+    }
+    if l1 == nil { // 如果 l1 是空的，那么此时 l2 一定不是空节点
+        l1, l2 = l2, l1 // 交换 l1 与 l2，保证 l1 非空，从而简化代码
+    }
+    carry += l1.Val // 节点值和进位加在一起
+    if l2 != nil {
+        carry += l2.Val // 节点值和进位加在一起
+        l2 = l2.Next    // 下一个节点
+    }
+    l1.Val = carry % 10 // 每个节点保存一个数位
+    l1.Next = addTwo(l1.Next, l2, carry/10) // 进位
+    return l1
+}
+
+func addTwoNumbers(l1, l2 *ListNode) *ListNode {
+    l1 = reverseList(l1)
+    l2 = reverseList(l2) // l1 和 l2 反转后，就变成【2. 两数相加】了
+    l3 := addTwo(l1, l2, 0)
+    return reverseList(l3)
+}
+```
+
+* [sol-JavaScript]
+
+```js
+var reverseList = function(head) {
+    if (head === null || head.next === null) {
+        return head;
+    }
+    let newHead = reverseList(head.next);
+    head.next.next = head; // 把下一个节点指向自己
+    head.next = null; // 断开指向下一个节点的连接，保证最终链表的末尾节点的 next 是空节点
+    return newHead;
+};
+
+// l1 和 l2 为当前遍历的节点，carry 为进位
+var addTwo = function(l1, l2, carry = 0) {
+    if (l1 === null && l2 === null) { // 递归边界：l1 和 l2 都是空节点
+        return carry ? new ListNode(carry) : null; // 如果进位了，就额外创建一个节点
+    }
+    if (l1 === null) { // 如果 l1 是空的，那么此时 l2 一定不是空节点
+        [l1, l2] = [l2, l1]; // 交换 l1 与 l2，保证 l1 非空，从而简化代码
+    }
+    carry += l1.val + (l2 ? l2.val : 0); // 节点值和进位加在一起
+    l1.val = carry % 10; // 每个节点保存一个数位
+    l1.next = addTwo(l1.next, (l2 ? l2.next : null), Math.floor(carry / 10)); // 进位
+    return l1;
+};
+
+var addTwoNumbers = function(l1, l2) {
+    l1 = reverseList(l1);
+    l2 = reverseList(l2); // l1 和 l2 反转后，就变成【2. 两数相加】了
+    let l3 = addTwo(l1, l2);
+    return reverseList(l3);
+}
+```
+
+#### 复杂度分析
+
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $l_1$ 长度和 $l_2$ 长度的最大值。
+- 空间复杂度：$\mathcal{O}(n)$。递归需要 $\mathcal{O}(n)$ 的栈空间。
+
+## 方法二：迭代写法
+
+同方法一，区别在于 $\texttt{reverseList}$ 和 $\texttt{addTwo}$ 都是迭代写法。
+
+* [sol-Python3]
+
+```py
+class Solution:
+    # 视频讲解 https://www.bilibili.com/video/BV1sd4y1x7KN/
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        pre = None
+        cur = head
+        while cur:
+            nxt = cur.next
+            cur.next = pre
+            pre = cur
+            cur = nxt
+        return pre
+
+    def addTwo(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        cur = dummy = ListNode()  # 哨兵节点
+        carry = 0  # 进位
+        while l1 or l2 or carry:  # 有一个不是空节点，或者还有进位，就继续迭代
+            if l1: carry += l1.val  # 节点值和进位加在一起
+            if l2: carry += l2.val  # 节点值和进位加在一起
+            cur.next = ListNode(carry % 10)  # 每个节点保存一个数位
+            carry //= 10  # 新的进位
+            cur = cur.next  # 下一个节点
+            if l1: l1 = l1.next  # 下一个节点
+            if l2: l2 = l2.next  # 下一个节点
+        return dummy.next  # 哨兵节点的下一个节点就是头节点
+
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        l1 = self.reverseList(l1)
+        l2 = self.reverseList(l2)  # l1 和 l2 反转后，就变成【2. 两数相加】了
+        l3 = self.addTwo(l1, l2)
+        return self.reverseList(l3)  # 计算完毕后再反转
+```
+
+* [sol-Java]
+
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        l1 = reverseList(l1);
+        l2 = reverseList(l2); // l1 和 l2 反转后，就变成【2. 两数相加】了
+        ListNode l3 = addTwo(l1, l2);
+        return reverseList(l3);
+    }
+
+    // 视频讲解 https://www.bilibili.com/video/BV1sd4y1x7KN/
+    private ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode nxt = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
+
+    private ListNode addTwo(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(); // 哨兵节点
+        ListNode cur = dummy;
+        int carry = 0; // 进位
+        while (l1 != null || l2 != null || carry != 0) { // 有一个不是空节点，或者还有进位，就继续迭代
+            if (l1 != null) carry += l1.val; // 节点值和进位加在一起
+            if (l2 != null) carry += l2.val; // 节点值和进位加在一起
+            cur = cur.next = new ListNode(carry % 10); // 每个节点保存一个数位
+            carry /= 10; // 新的进位
+            if (l1 != null) l1 = l1.next; // 下一个节点
+            if (l2 != null) l2 = l2.next; // 下一个节点
+        }
+        return dummy.next; // 哨兵节点的下一个节点就是头节点
+    }
+}
+```
+
+* [sol-C++]
+
+```cpp
+class Solution {
+    // 视频讲解 https://www.bilibili.com/video/BV1sd4y1x7KN/
+    ListNode* reverseList(ListNode* head) {
+        ListNode* pre = nullptr, *cur = head;
+        while (cur) {
+            ListNode* nxt = cur->next;
+            cur->next = pre;
+            pre = cur;
+            cur = nxt;
+        }
+        return pre;
+    }
+
+    ListNode* addTwo(ListNode* l1, ListNode* l2) {
+        ListNode dummy; // 哨兵节点
+        auto cur = &dummy;
+        int carry = 0; // 进位
+        while (l1 || l2 || carry) { // 有一个不是空节点，或者还有进位，就继续迭代
+            if (l1) carry += l1->val; // 节点值和进位加在一起
+            if (l2) carry += l2->val; // 节点值和进位加在一起
+            cur = cur->next = new ListNode(carry % 10); // 每个节点保存一个数位
+            carry /= 10; // 新的进位
+            if (l1) l1 = l1->next; // 下一个节点
+            if (l2) l2 = l2->next; // 下一个节点
+        }
+        return dummy.next; // 哨兵节点的下一个节点就是头节点
+    }
+
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        l1 = reverseList(l1);
+        l2 = reverseList(l2);
+        auto l3 = addTwo(l1, l2);
+        return reverseList(l3);
+    }
+};
+```
+
+* [sol-Go]
+
+```go
+// 视频讲解 https://www.bilibili.com/video/BV1sd4y1x7KN/
+func reverseList(head *ListNode) *ListNode {
+    var pre, cur *ListNode = nil, head
+    for cur != nil {
+        nxt := cur.Next
+        cur.Next = pre
+        pre = cur
+        cur = nxt
+    }
+    return pre
+}
+
+func addTwo(l1, l2 *ListNode) *ListNode {
+    dummy := &ListNode{} // 哨兵节点
+    cur := dummy
+    carry := 0 // 进位
+    for l1 != nil || l2 != nil || carry != 0 { // 有一个不是空节点，或者还有进位，就继续迭代
+        if l1 != nil {
+            carry += l1.Val // 节点值和进位加在一起
+        }
+        if l2 != nil {
+            carry += l2.Val // 节点值和进位加在一起
+        }
+        cur.Next = &ListNode{Val: carry % 10} // 每个节点保存一个数位
+        carry /= 10 // 新的进位
+        cur = cur.Next // 下一个节点
+        if l1 != nil {
+            l1 = l1.Next // 下一个节点
+        }
+        if l2 != nil {
+            l2 = l2.Next // 下一个节点
+        }
+    }
+    return dummy.Next // 哨兵节点的下一个节点就是头节点
+}
+
+func addTwoNumbers(l1, l2 *ListNode) *ListNode {
+    l1 = reverseList(l1)
+    l2 = reverseList(l2) // l1 和 l2 反转后，就变成【2. 两数相加】了
+    l3 := addTwo(l1, l2)
+    return reverseList(l3)
+}
+```
+
+* [sol-JavaScript]
+
+```js
+// 视频讲解 https://www.bilibili.com/video/BV1sd4y1x7KN/
+var reverseList = function(head) {
+    let pre = null;
+    let cur = head;
+    while (cur) {
+        let nxt = cur.next;
+        cur.next = pre;
+        pre = cur;
+        cur = nxt;
+    }
+    return pre;
+};
+
+var addTwo = function(l1, l2) {
+    let dummy = new ListNode(); // 哨兵节点
+    let cur = dummy;
+    let carry = 0; // 进位
+    while (l1 || l2 || carry) {
+        if (l1) carry += l1.val; // 节点值和进位加在一起
+        if (l2) carry += l2.val; // 节点值和进位加在一起
+        cur = cur.next = new ListNode(carry % 10); // 每个节点保存一个数位
+        carry = Math.floor(carry / 10); // 新的进位
+        if (l1) l1 = l1.next; // 下一个节点
+        if (l2) l2 = l2.next; // 下一个节点
+    }
+    return dummy.next; // 哨兵节点的下一个节点就是头节点
+};
+
+var addTwoNumbers = function(l1, l2) {
+    l1 = reverseList(l1);
+    l2 = reverseList(l2);
+    let l3 = addTwo(l1, l2);
+    return reverseList(l3);
+}
+```
+
+#### 复杂度分析
+
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为 $l_1$ 长度和 $l_2$ 长度的最大值。
+- 空间复杂度：$\mathcal{O}(1)$。返回值不计入。
+
+## 练习
+
+- [92. 反转链表 II](https://leetcode.cn/problems/reverse-linked-list-ii/)
+- [25. K 个一组翻转链表](https://leetcode.cn/problems/reverse-nodes-in-k-group/)
+- [24. 两两交换链表中的节点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
+
+## 分类题单
+
+[如何科学刷题？](https://leetcode.cn/circle/discuss/RvFUtj/)
+
+1. [滑动窗口（定长/不定长/多指针）](https://leetcode.cn/circle/discuss/0viNMK/)
+2. [二分算法（二分答案/最小化最大值/最大化最小值/第K小）](https://leetcode.cn/circle/discuss/SqopEo/)
+3. [单调栈（基础/矩形面积/贡献法/最小字典序）](https://leetcode.cn/circle/discuss/9oZFK9/)
+4. [网格图（DFS/BFS/综合应用）](https://leetcode.cn/circle/discuss/YiXPXW/)
+5. [位运算（基础/性质/拆位/试填/恒等式/思维）](https://leetcode.cn/circle/discuss/dHn9Vk/)
+6. [图论算法（DFS/BFS/拓扑排序/最短路/最小生成树/二分图/基环树/欧拉路径）](https://leetcode.cn/circle/discuss/01LUak/)
+7. [动态规划（入门/背包/状态机/划分/区间/状压/数位/数据结构优化/树形/博弈/概率期望）](https://leetcode.cn/circle/discuss/tXLS3i/)
+8. [常用数据结构（前缀和/差分/栈/队列/堆/字典树/并查集/树状数组/线段树）](https://leetcode.cn/circle/discuss/mOr1u6/)
+9. [数学算法（数论/组合/概率期望/博弈/计算几何/随机算法）](https://leetcode.cn/circle/discuss/IYT3ss/)
+10. [贪心算法（基本贪心策略/反悔/区间/字典序/数学/思维/脑筋急转弯/构造）](https://leetcode.cn/circle/discuss/g6KTKL/)
+11. [链表、二叉树与一般树（前后指针/快慢指针/DFS/BFS/直径/LCA）](https://leetcode.cn/circle/discuss/K0n2gO/)
+
+[我的题解精选（已分类）](https://github.com/EndlessCheng/codeforces-go/blob/master/leetcode/SOLUTIONS.md)
+
+欢迎关注 [B站@灵茶山艾府](https://space.bilibili.com/206214)

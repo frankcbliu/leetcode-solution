@@ -6,6 +6,11 @@ leetcode 题解 - 个人训练题集(c++)
 
 ## 0.Clion插件配置
 
+- File Name
+```c++
+${question.frontendQuestionId}-${question.titleSlug}
+```
+
 - Code Template
 
 ```c++
@@ -126,17 +131,19 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 
 ## 5. 链表
-- [x] [203-移除链表元素](./leetcode/editor/cn/203-remove-linked-list-elements.cpp)
-- [x][83-删除排序链表中的重复元素](./leetcode/editor/cn/83-remove-duplicates-from-sorted-list.cpp)
 - [x] [206-反转链表](./leetcode/editor/cn/206-reverse-linked-list.cpp)
+- [x] [92-反转链表II](./leetcode/editor/cn/92-reverse-linked-list-ii.cpp)
 - [x] [25-K个一组反转链表](./leetcode/editor/cn/25-reverse-nodes-in-k-group.cpp)
+- [x] [2-两数相加](./leetcode/editor/cn/2-add-two-numbers.cpp)
+- [x] [445-两数相加II](./leetcode/editor/cn/445-add-two-numbers-ii.cpp)
+- [x] [203-移除链表元素](./leetcode/editor/cn/203-remove-linked-list-elements.cpp)
+- [x] [83-删除排序链表中的重复元素](./leetcode/editor/cn/83-remove-duplicates-from-sorted-list.cpp)
 - [x] [141-环形链表](./leetcode/editor/cn/141-linked-list-cycle.cpp)
 - [x] [142-环形链表II](./leetcode/editor/cn/142-linked-list-cycle-ii.cpp)
 - [x] [160-相交链表](./leetcode/editor/cn/160-intersection-of-two-linked-lists.cpp)
 - [x] [21-合并两个有序链表](./leetcode/editor/cn/21-merge-two-sorted-lists.cpp)
-- [ ] [链表求和](./leetcode/editor/cn/面试题%2002.05-sum-lists-lcci.cpp)
-- [ ] [234-回文链表](./leetcode/editor/cn/234-palindrome-linked-list.cpp)
-- [ ] [138-随机链表的复制](./leetcode/editor/cn/138-copy-list-with-random-pointer.cpp)
+- [x] [234-回文链表](./leetcode/editor/cn/234-palindrome-linked-list.cpp)
+- [x] [138-随机链表的复制](./leetcode/editor/cn/138-copy-list-with-random-pointer.cpp)
 
 ## 6. 排序算法
 - [x] [冒泡排序](./sort/bubble_sort.cc)
