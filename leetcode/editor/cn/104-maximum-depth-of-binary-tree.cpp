@@ -52,9 +52,13 @@ class Solution {
   public:
   // 递归解法
   int maxDepth(TreeNode *root) {
+    // 递归边界条件
     if (root == nullptr) return 0;
+    // 计算左节点深度
     int left_len = maxDepth(root->left);
+    // 计算右节点深度
     int right_len = maxDepth(root->right);
+    // 计算最大深度
     return max(left_len, right_len) + 1;
   }
 };

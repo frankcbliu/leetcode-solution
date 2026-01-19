@@ -59,7 +59,7 @@ class Solution {
   }
 
   // BFS做法，需要涉及队列
-  int minDepth(TreeNode *root) {
+  int minDepthBFS(TreeNode *root) {
     if (root == nullptr) return 0;
 
     // 还有一个办法，把 depth 也打到 queue 里，变成 queue<pair<TreeNode*, int>>
@@ -85,6 +85,30 @@ class Solution {
       depth++;
     }
     return depth;
+  }
+
+  int minDepth(TreeNode *root) {
+    // 边界条件
+    if (root == nullptr) return 0;
+    // 核心逻辑
+    // 1. 构建队列，填充root节点
+    queue<pair<TreeNode * /*子树*/, int /*层级*/>> q;
+    q.push({root, 1});
+    // 2. 循环直到队列非空，按层填充子节点
+    while (!q.empty()) {
+      // 3. 取出队列头结点
+      auto front = q.front();
+      q.pop();
+      int depth = front.second;
+      // 4. 计算是否叶子节点，如果是，说明遇到最小深度，直接返回
+      if (front.first->left == nullptr && front.first->right == nullptr) {
+        return depth;
+      }
+      // 5. 把左子节点和右子节点填入队列中
+      if (front.first->left) q.push(make_pair(front.first->left, depth+1));
+      if (front.first->right) q.push(make_pair(front.first->right, depth+1));
+    }
+    return 0;
   }
 };
 //leetcode submit region end(Prohibit modification and deletion)
