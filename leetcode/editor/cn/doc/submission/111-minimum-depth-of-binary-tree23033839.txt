@@ -1,0 +1,22 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+        if (root.left == null || root.right == null) return left + right + 1; // 其中一个非空，另一个为空的情况下，空的一个就是0，所以直接加上不影响
+//       简便点的写法：
+//        if (left == 0 || right == 0) return left + right + 1;
+        return Math.min(left, right) + 1; // 两者非空的情况下，
+    }
+}
+//runtime:2 ms
+//memory:36.8 MB

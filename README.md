@@ -89,6 +89,32 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [647-回文子串](./leetcode/editor/cn/647-palindromic-substrings.cpp)
 - [x] [516-最长回文子序列](./leetcode/editor/cn/516-longest-palindromic-subsequence.cpp)
 
+
+### 动态规划篇(先按分数排序, 刷完后再分类)
+
+- [x] [2320-统计放置房子的方式数](./leetcode/editor/cn/2320-count-number-of-ways-to-place-houses.cpp)
+- [x] [2140-解决智力问题](./leetcode/editor/cn/2140-solving-questions-with-brainpower.cpp)
+- [x] [2321-拼接数组的最大分数](./leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
+- [x] [2266-统计打字方案数](./leetcode/editor/cn/2266-count-number-of-texts.cpp)
+  - 不太直观的动态规划题
+- [x] [2305-公平分发饼干(状压 DP)](./leetcode/editor/cn/2305-fair-distribution-of-cookies.cpp)
+- [ ] 2262-字符串的总引力
+- [ ] 2318-不同骰子序列的数目
+- [ ] 2209-用地毯覆盖后的最少白色砖块
+- [ ] 2246-相邻字符不同的最长路径
+- [ ] 2218-从栈中取出 K 个硬币的最大面值和
+- [ ] 2167-移除所有载有违禁货物车厢所需的最少时间
+- [ ] 2188-完成比赛的最少时间
+- [ ] 2312-卖木头块
+- [ ] 2172-数组的最大与和(状压DP)
+- [ ] 2272-最大波动的子字符串
+- [ ] LCP 53-守护太空城(状压DP)
+
+### 待刷题单:
+
+- [【灵茶山艾府】2022 年周赛题目总结（上篇）](https://leetcode.cn/circle/discuss/G0n5iY/%20%E4%BD%9C%E8%80%85%EF%BC%9A%E7%81%B5%E8%8C%B6%E5%B1%B1%E8%89%BE%E5%BA%9C%20https://www.bilibili.com/read/cv17607968?spm_id_from=333.999.0.0%20%E5%87%BA%E5%A4%84%EF%BC%9Abilibili)
+- [2022 年周赛题目总结（下篇）](https://leetcode.cn/circle/discuss/WR1MJP/%20%E4%BD%9C%E8%80%85%EF%BC%9A%E7%81%B5%E8%8C%B6%E5%B1%B1%E8%89%BE%E5%BA%9C%20https://www.bilibili.com/read/cv20923021?spm_id_from=333.999.0.0%20%E5%87%BA%E5%A4%84%EF%BC%9Abilibili)
+
 ## 2.贪心算法
 
 - [ ] 455-分发饼干
@@ -103,32 +129,6 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [2778-特殊元素平方和](./leetcode/editor/cn/2778-sum-of-squares-of-special-elements.cpp)
 - [x] [2769-找出最大的可达成数字](./leetcode/editor/cn/2769-find-the-maximum-achievable-number.cpp)
 - [x] [2765-最长交替子序列(写得有点复杂了)](./leetcode/editor/cn/2765-longest-alternating-subarray.cpp)
-
-### 动态规划篇(先按分数排序, 刷完后再分类)
-
-- [x] [2320-统计放置房子的方式数](./leetcode/editor/cn/2320-count-number-of-ways-to-place-houses.cpp)
-- [x] [2140-解决智力问题](./leetcode/editor/cn/2140-solving-questions-with-brainpower.cpp)
-- [x] [2321-拼接数组的最大分数](./leetcode/editor/cn/2321-maximum-score-of-spliced-array.cpp)
-- [x] [2266-统计打字方案数](./leetcode/editor/cn/2266-count-number-of-texts.cpp)
-    - 不太直观的动态规划题
-- [x] [2305-公平分发饼干(状压 DP)](./leetcode/editor/cn/2305-fair-distribution-of-cookies.cpp)
-- [ ] 2262-字符串的总引力
-- [ ] 2318-不同骰子序列的数目
-- [ ] 2209-用地毯覆盖后的最少白色砖块
-- [ ] 2246-相邻字符不同的最长路径
-- [ ] 2218-从栈中取出 K 个硬币的最大面值和
-- [ ] 2167-移除所有载有违禁货物车厢所需的最少时间
-- [ ] 2188-完成比赛的最少时间
-- [ ] 2312-卖木头块
-- [ ] 2172-数组的最大与和(状压DP)
-- [ ] 2272-最大波动的子字符串
-- [ ] LCP 53-守护太空城(状压DP)
-
-## 待刷题单:
-
-- [【灵茶山艾府】2022 年周赛题目总结（上篇）](https://leetcode.cn/circle/discuss/G0n5iY/%20%E4%BD%9C%E8%80%85%EF%BC%9A%E7%81%B5%E8%8C%B6%E5%B1%B1%E8%89%BE%E5%BA%9C%20https://www.bilibili.com/read/cv17607968?spm_id_from=333.999.0.0%20%E5%87%BA%E5%A4%84%EF%BC%9Abilibili)
-- [2022 年周赛题目总结（下篇）](https://leetcode.cn/circle/discuss/WR1MJP/%20%E4%BD%9C%E8%80%85%EF%BC%9A%E7%81%B5%E8%8C%B6%E5%B1%B1%E8%89%BE%E5%BA%9C%20https://www.bilibili.com/read/cv20923021?spm_id_from=333.999.0.0%20%E5%87%BA%E5%A4%84%EF%BC%9Abilibili)
-
 
 ## 5. 链表
 - [x] [206-反转链表](./leetcode/editor/cn/206-reverse-linked-list.cpp)
@@ -145,7 +145,17 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [234-回文链表](./leetcode/editor/cn/234-palindrome-linked-list.cpp)
 - [x] [138-随机链表的复制](./leetcode/editor/cn/138-copy-list-with-random-pointer.cpp)
 
-## 6. 排序算法
+## 6. 二叉树
+- [x] [二叉树的最大深度](./leetcode/editor/cn/104-maximum-depth-of-binary-tree.cpp)
+- [x] [二叉树的最小深度](./leetcode/editor/cn/111-minimum-depth-of-binary-tree.cpp)
+- [ ] [之字形打印二叉树](./leetcode/editor/cn/)
+- [ ] [二叉搜索树的第 K 大节点](./leetcode/editor/cn/)
+- [ ] [二叉树的最近公共祖先](./leetcode/editor/cn/)
+- [ ] [二叉树中和为某一值的路径*](./leetcode/editor/cn/)
+- [ ] [二叉树的最大路径和](./leetcode/editor/cn/)
+- [ ] [二叉树的右视图](./leetcode/editor/cn/)
+
+## 7. 排序算法
 - [x] [冒泡排序](./sort/bubble_sort.cc)
 - [x] [选择排序](./sort/select_sort.cc)
 - [x] [插入排序](./sort/insert_sort.cc)
