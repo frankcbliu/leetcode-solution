@@ -1,0 +1,276 @@
+## 视频讲解
+
+请看[【基础算法精讲 13】](https://www.bilibili.com/video/BV1hG4y1277i/)，制作不易，欢迎点赞~
+
+## 方法一：两个数组
+
+* [sol1-Python3]
+
+```py
+class Solution:
+    def decorateRecord(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None:
+            return []
+        ans = []
+        cur = [root]
+        even = False
+        while cur:
+            nxt = []
+            vals = []
+            for node in cur:
+                vals.append(node.val)
+                if node.left:  nxt.append(node.left)
+                if node.right: nxt.append(node.right)
+            cur = nxt
+            ans.append(vals[::-1] if even else vals)
+            even = not even
+        return ans
+```
+
+* [sol1-Java]
+
+```java
+class Solution {
+    public List<List<Integer>> decorateRecord(TreeNode root) {
+        if (root == null) return List.of();
+        List<List<Integer>> ans = new ArrayList<>();
+        List<TreeNode> cur = new ArrayList<>();
+        cur.add(root);
+        for (boolean even = false; !cur.isEmpty(); even = !even) {
+            List<TreeNode> nxt = new ArrayList<>();
+            List<Integer> vals = new ArrayList<>(cur.size()); // 容量已知
+            for (TreeNode node : cur) {
+                vals.add(node.val);
+                if (node.left != null)  nxt.add(node.left);
+                if (node.right != null) nxt.add(node.right);
+            }
+            cur = nxt;
+            if (even) Collections.reverse(vals);
+            ans.add(vals);
+        }
+        return ans;
+    }
+}
+```
+
+* [sol1-C++]
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> decorateRecord(TreeNode *root) {
+        if (root == nullptr) return {};
+        vector<vector<int>> ans;
+        vector<TreeNode *> cur = {root};
+        for (bool even = false; !cur.empty(); even = !even) {
+            vector<TreeNode *> nxt;
+            vector<int> vals;
+            for (auto node : cur) {
+                vals.push_back(node->val);
+                if (node->left)  nxt.push_back(node->left);
+                if (node->right) nxt.push_back(node->right);
+            }
+            cur = move(nxt);
+            if (even) reverse(vals.begin(), vals.end());
+            ans.emplace_back(vals);
+        }
+        return ans;
+    }
+};
+```
+
+* [sol1-Go]
+
+```go
+func decorateRecord(root *TreeNode) (ans [][]int) {
+    if root == nil {
+        return
+    }
+    cur := []*TreeNode{root}
+    for even := false; len(cur) > 0; even = !even {
+        nxt := []*TreeNode{}
+        vals := make([]int, len(cur)) // 大小已知
+        for i, node := range cur {
+            if even {
+                vals[len(cur)-1-i] = node.Val // 倒着添加
+            } else {
+                vals[i] = node.Val
+            }
+            if node.Left != nil {
+                nxt = append(nxt, node.Left)
+            }
+            if node.Right != nil {
+                nxt = append(nxt, node.Right)
+            }
+        }
+        cur = nxt
+        ans = append(ans, vals)
+    }
+    return
+}
+```
+
+* [sol1-JavaScript]
+
+```js
+var decorateRecord = function (root) {
+    if (root == null) return [];
+    let ans = [];
+    let cur = [root];
+    for (let even = false; cur.length; even = !even) {
+        let vals = []
+        let nxt = [];
+        for (const node of cur) {
+            vals.push(node.val);
+            if (node.left) nxt.push(node.left);
+            if (node.right) nxt.push(node.right);
+        }
+        cur = nxt;
+        if (even) vals.reverse();
+        ans.push(vals);
+    }
+    return ans;
+};
+```
+
+#### 复杂度分析
+
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为二叉树的节点个数。
+- 空间复杂度：$\mathcal{O}(n)$。满二叉树（每一层都填满）最后一层有大约 $n/2$ 个节点，因此数组中最多有 $\mathcal{O}(n)$ 个元素，所以空间复杂度是 $\mathcal{O}(n)$ 的。
+
+## 方法二：一个队列
+
+* [sol2-Python3]
+
+```py
+class Solution:
+    def decorateRecord(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if root is None:
+            return []
+        ans = []
+        q = deque([root])
+        even = False
+        while q:
+            vals = []
+            for _ in range(len(q)):
+                node = q.popleft()
+                vals.append(node.val)
+                if node.left:  q.append(node.left)
+                if node.right: q.append(node.right)
+            ans.append(vals[::-1] if even else vals)
+            even = not even
+        return ans
+```
+
+* [sol2-Java]
+
+```java
+class Solution {
+    public List<List<Integer>> decorateRecord(TreeNode root) {
+        if (root == null) return List.of();
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> q = new ArrayDeque<>();
+        q.add(root);
+        for (boolean even = false; !q.isEmpty(); even = !even) {
+            int n = q.size();
+            List<Integer> vals = new ArrayList<>(n); // 容量已知
+            while (n-- > 0) {
+                TreeNode node = q.poll();
+                vals.add(node.val);
+                if (node.left != null)  q.add(node.left);
+                if (node.right != null) q.add(node.right);
+            }
+            if (even) Collections.reverse(vals);
+            ans.add(vals);
+        }
+        return ans;
+    }
+}
+```
+
+* [sol2-C++]
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> decorateRecord(TreeNode *root) {
+        if (root == nullptr) return {};
+        vector<vector<int>> ans;
+        queue<TreeNode *> q;
+        q.push(root);
+        for (bool even = false; !q.empty(); even = !even) {
+            vector<int> vals;
+            for (int n = q.size(); n--;) {
+                auto node = q.front();
+                q.pop();
+                vals.push_back(node->val);
+                if (node->left)  q.push(node->left);
+                if (node->right) q.push(node->right);
+            }
+            if (even) reverse(vals.begin(), vals.end());
+            ans.emplace_back(vals);
+        }
+        return ans;
+    }
+};
+```
+
+* [sol2-Go]
+
+```go
+func decorateRecord(root *TreeNode) (ans [][]int) {
+    if root == nil {
+        return
+    }
+    q := []*TreeNode{root}
+    for even := false; len(q) > 0; even = !even {
+        n := len(q)
+        vals := make([]int, n) // 大小已知
+        for i := 0; i < n; i++ {
+            node := q[0]
+            q = q[1:]
+            if even {
+                vals[n-1-i] = node.Val // 倒着添加
+            } else {
+                vals[i] = node.Val
+            }
+            if node.Left != nil {
+                q = append(q, node.Left)
+            }
+            if node.Right != nil {
+                q = append(q, node.Right)
+            }
+        }
+        ans = append(ans, vals)
+    }
+    return
+}
+```
+
+* [sol2-JavaScript]
+
+```js
+var decorateRecord = function (root) {
+    if (root == null) return [];
+    let ans = [];
+    let q = new Queue([root]);
+    for (let even = false; !q.isEmpty(); even = !even) {
+        let vals = []
+        for (let n = q.size(); n; n--) {
+            const node = q.pop();
+            vals.push(node.val);
+            if (node.left) q.push(node.left);
+            if (node.right) q.push(node.right);
+        }
+        if (even) vals.reverse();
+        ans.push(vals);
+    }
+    return ans;
+};
+```
+
+#### 复杂度分析
+
+- 时间复杂度：$\mathcal{O}(n)$，其中 $n$ 为二叉树的节点个数。
+- 空间复杂度：$\mathcal{O}(n)$。满二叉树（每一层都填满）最后一层有大约 $n/2$ 个节点，因此队列中最多有 $\mathcal{O}(n)$ 个元素，所以空间复杂度是 $\mathcal{O}(n)$ 的。
+

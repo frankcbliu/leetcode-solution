@@ -148,7 +148,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 ## 6. 二叉树
 - [x] [二叉树的最大深度](./leetcode/editor/cn/104-maximum-depth-of-binary-tree.cpp)
 - [x] [二叉树的最小深度](./leetcode/editor/cn/111-minimum-depth-of-binary-tree.cpp)
-- [ ] [之字形打印二叉树](./leetcode/editor/cn/)
+- [x] [彩灯装饰记录I](./leetcode/editor/cn/LCR%20149-cong-shang-dao-xia-da-yin-er-cha-shu-lcof.cpp)
+- [x] [彩灯装饰记录II](./leetcode/editor/cn/LCR%20150-cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof.cpp)
+- [x] [彩灯装饰记录III](./leetcode/editor/cn/LCR%20151-cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof.cpp)
 - [ ] [二叉搜索树的第 K 大节点](./leetcode/editor/cn/)
 - [ ] [二叉树的最近公共祖先](./leetcode/editor/cn/)
 - [ ] [二叉树中和为某一值的路径*](./leetcode/editor/cn/)
