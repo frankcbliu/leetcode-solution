@@ -1,0 +1,65 @@
+### 方法一：倒过来的中序遍历。
+
+1. 我们都知道，中序遍历一颗二叉搜索树会得到一个升序的数字序列。但是题目要我们求第 k 大的数，那如果我们 somehow 能得到一个降序的数字序列，岂不是马上就能做出来吗？
+2. 由此我们可以轻易想出，只需要把原本是 “左中右” 的中序遍历改成 “右中左” 的反向中序遍历即可。这就是本题唯一的思维考点了（个人觉得）。
+3. 然后维护两个变量 count 和 res 即可。count 用来计数我们在降序的数字序列中走了几位，当走了 k 位时，就让 res 等于当前的 root -> val，然后退出 inorder 函数即可。
+
+# 
+
+### 先放C++代码，思路简单易懂。
+
+* cpp
+
+```cpp
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int count = 0, res = 0;
+
+    int kthLargest(TreeNode* root, int k) {
+        inorder(root, k);
+
+        return res;
+    }
+
+    void inorder(TreeNode* root, int k) {
+        if (!root) {
+            return;
+        }
+
+        inorder(root -> right, k); // 右
+
+        ++ count;
+        if (count == k) {
+            res = root -> val;
+            return;
+        }
+
+        inorder(root -> left, k); // 左
+    }
+};
+```
+
+执行结果截图：
+![image.png](https://pic.leetcode-cn.com/1606879859-nrOXWl-image.png)
+
+# 
+
+### 一点感悟
+
+不知怎的，可能是最近中等题刷的比较多，偶尔也刷到了一下困难题，这两天刷简单题感觉挺顺的，基本都是一两次尝试就能 AC。自我感觉简单题一般来说是只有一个思维考点，如果能想到它并且掌握了这道题的基础知识（比如本题就是 BST 的特性，以及关于中序遍历的代码写法），就一定能做出来。但是目前中等题就还是不能保证能完全独立自主地做出来，困难题就更不可能了，继续努力吧！12月冲冲冲！
+
+# 
+
+### Tracker
+
+1. 1刷：2020/12/02
+

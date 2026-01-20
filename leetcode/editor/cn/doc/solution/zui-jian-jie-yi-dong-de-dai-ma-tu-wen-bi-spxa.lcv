@@ -1,0 +1,90 @@
+### 1、思路
+
+**(dfs)**  $O(n)$
+
+**什么是二叉搜索树 ？**
+
+二叉搜索树是一棵有序的二叉树，所以我们也可以称它为二叉排序树。具有以下性质的二叉树我们称之为二叉搜索树：若它的左子树不为空，那么左子树上的所有值均小于它的根节点；若它的右子树不为空，那么右子树上所有值均大于它的根节点。它的左子树和右子树分别也为二叉搜索树。
+
+**二叉搜索树的中序遍历是：左=>根=>右； 二叉搜索树的中序遍历从小到大是有序的。**
+
+**中序遍历模板**
+
+* cpp
+
+```cpp
+//打印中序遍历
+void dfs(TreeNode* root ) 
+{
+    if(!root) return;
+    dfs(root->left); 	//左
+    print(root->val);   //根
+   	dfs(root->right);	//右
+}
+```
+
+**如图所示**
+
+![<img src="力扣500题刷题笔记.assets/image-20210714155248852.png" alt="image-20210714155248852" style="zoom: 50%;" />](https://pic.leetcode-cn.com/1627215385-OiEoGu-file_1627215384028)
+
+因此求二叉搜索树第 `k`大的节点” 可转化为求 “二叉搜索树的中序遍历倒序的第`k` 个节点”。
+
+**过程如下：**
+
+- 1、按照**右->根->左**的顺序（中序遍历倒序）遍历二叉树
+
+- 2、我们每次遍历一个节点的时候就让`k--`，当`k`减为`0`时，我们就找到了第`k`大的节点。
+
+具体实现细节看代码。
+
+**时间复杂度分析：** 每个节点最多只会被遍历`1`次，因此`n`个节点，时间复杂度为$O(n)$ 。
+
+### 2、c++代码
+
+* cpp
+
+```cpp
+
+class Solution {
+public: 
+    int res;
+    int kthLargest(TreeNode* root, int k) {
+        dfs(root,k);
+        return res;
+    }
+    void dfs(TreeNode* root ,int &k) //传引用 这里需要保证所有dfs函数共用一个k 
+    {
+        if(!root) return;
+        dfs(root->right,k); //右
+        k--;
+        if(!k) res = root->val; //根
+        dfs(root->left,k); //左
+    }
+};
+```
+
+### 3、java代码
+
+* java
+
+```java
+
+class Solution {
+    int res;
+    int index = 0; //计数器
+    public int kthLargest(TreeNode root, int k) {
+        dfs(root,k);
+        return res;
+    }
+    void dfs(TreeNode root ,int k) 
+    {
+        if(root == null) return;
+        dfs(root.right,k); //右
+        index++;
+        if(k == index) res = root.val; //根
+        dfs(root.left,k); //左
+    }
+}
+```
+
+![在这里插入图片描述](https://pic.leetcode-cn.com/1627215385-tQPcnr-file_1627215384024)

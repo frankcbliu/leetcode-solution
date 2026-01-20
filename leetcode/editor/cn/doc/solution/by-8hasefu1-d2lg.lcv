@@ -1,0 +1,93 @@
+1. 递归
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    void dfs(TreeNode* root, int& k , int& res)
+    {
+        if (root == nullptr || k == 0) // k == 0剪枝
+            return;
+
+        dfs(root->right, k, res);
+        k--;
+        if (k == 0) res = root->val;
+        dfs(root->left,  k, res);
+    }
+    int kthLargest(TreeNode* root, int k) 
+    {
+        int res = 0;
+        dfs(root, k, res);
+        return res;
+    }
+};
+```
+
+2. 循环迭代
+
+* cpp
+
+```cpp
+ class Solution {
+public:
+    int kthLargest(TreeNode* root, int k) {
+        if (root == nullptr || k < 0)
+            return k;
+        
+        stack<TreeNode*> st;
+
+        TreeNode* node = root;
+        do 
+        {
+            while (node)
+            {
+                st.push(node);
+                node = node->right;
+            }    
+            
+            if (!st.empty())
+            {
+                node = st.top();
+                st.pop();
+                k--;
+                if (k == 0) return node->val;
+            }
+            
+            node = node->left;
+
+        } while (node != nullptr || !st.empty());
+
+        return 0;
+    }
+};
+```
+
+3. 导入红黑树，利用迭代器
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    void dfs(TreeNode* root, set<int>& s)
+    {
+        if (root == nullptr)
+            return;
+        s.insert(root->val);
+        dfs(root->left, s);
+        dfs(root->right, s);
+    }
+    int kthLargest(TreeNode* root, int k) {
+        set<int> s;
+        dfs(root, s);
+        for (auto it = s.rbegin(); it != s.rend(); ++it)
+        {
+            k--;
+            if (k == 0) return *it;
+        }
+        return root->val;
+    }
+};
+```
+
