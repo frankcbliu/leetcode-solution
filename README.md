@@ -166,3 +166,7 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [插入排序](./sort/insert_sort.cc)
 - [x] [归并排序](./sort/merge_sort.cc)
 
+## 8. X数之和
+- [x] [两数之和](./leetcode/editor/cn/1-two-sum.cpp)
+- [ ] [三数之和](./leetcode/editor/cn)
+- [ ] [最接近的三数之和](./leetcode/editor/cn)
