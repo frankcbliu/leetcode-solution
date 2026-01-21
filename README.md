@@ -146,18 +146,19 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [138-随机链表的复制](./leetcode/editor/cn/138-copy-list-with-random-pointer.cpp)
 
 ## 6. 二叉树
+- [x] [翻转二叉树](./leetcode/editor/cn/226-invert-binary-tree.cpp)
 - [x] [二叉树的最大深度](./leetcode/editor/cn/104-maximum-depth-of-binary-tree.cpp)
 - [x] [二叉树的最小深度](./leetcode/editor/cn/111-minimum-depth-of-binary-tree.cpp)
 - [x] [彩灯装饰记录I](./leetcode/editor/cn/LCR%20149-cong-shang-dao-xia-da-yin-er-cha-shu-lcof.cpp)
 - [x] [彩灯装饰记录II](./leetcode/editor/cn/LCR%20150-cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof.cpp)
 - [x] [彩灯装饰记录III](./leetcode/editor/cn/LCR%20151-cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof.cpp)
+- [x] [二叉树的右视图](./leetcode/editor/cn/199-binary-tree-right-side-view.cpp)
 - [x] [二叉搜索树的第 K 小节点](./leetcode/editor/cn/230-kth-smallest-element-in-a-bst.cpp)
 - [x] [二叉搜索树的第 K 大节点](./leetcode/editor/cn/LCR%20174-er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof.cpp)
 - [x] [二叉树的最近公共祖先](./leetcode/editor/cn/236-lowest-common-ancestor-of-a-binary-tree.cpp)
 - [x] [二叉搜索树的最近公共祖先](./leetcode/editor/cn/235-lowest-common-ancestor-of-a-binary-search-tree.cpp)
-- [ ] [二叉树中和为某一值的路径*](./leetcode/editor/cn/)
-- [ ] [二叉树的最大路径和](./leetcode/editor/cn/)
-- [ ] [二叉树的右视图](./leetcode/editor/cn/)
+- [x] [二叉树中和为某一值的路径*](./leetcode/editor/cn/LCR%20153-er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof.cpp)
+- [x] [二叉树的最大路径和](./leetcode/editor/cn/124-binary-tree-maximum-path-sum.cpp)
 
 ## 7. 排序算法
 - [x] [冒泡排序](./sort/bubble_sort.cc)
