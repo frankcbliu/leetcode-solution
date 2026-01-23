@@ -166,7 +166,11 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [插入排序](./sort/insert_sort.cc)
 - [x] [归并排序](./sort/merge_sort.cc)
 
-## 8. X数之和
+## 8. 双指针
 - [x] [两数之和](./leetcode/editor/cn/1-two-sum.cpp)
 - [x] [三数之和](./leetcode/editor/cn/15-3sum.cpp)
 - [x] [最接近的三数之和](./leetcode/editor/cn/16-3sum-closest.cpp)
+- [x] [长度最小的子数组](./leetcode/editor/cn/209-minimum-size-subarray-sum.cpp)
+- [x] [乘积小于K的子数组](./leetcode/editor/cn/713-subarray-product-less-than-k.cpp)
+- [x] [无重复字符的最长子串](./leetcode/editor/cn/3-longest-substring-without-repeating-characters.cpp)
+
