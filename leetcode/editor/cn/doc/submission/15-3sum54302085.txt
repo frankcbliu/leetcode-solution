@@ -1,0 +1,37 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+ List<List<Integer>> res = new ArrayList<>();
+        int len = nums.length;
+        if (len < 3)
+            return res;
+        Arrays.sort(nums); // 先排序
+        for (int i = 0; i < len; i++) {
+            if (nums[i] > 0) { // 第一位如果大于0，则不用看了
+                break;
+            }
+            // 去重
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int low = i + 1;
+            int high = len - 1;
+            while (low < high) {
+                List<Integer> list = new ArrayList<>();
+                int sum = nums[i] + nums[low] + nums[high];
+                if (sum == 0) {
+                    res.add(Arrays.asList(nums[i], nums[low], nums[high]));
+                    while (low < high && nums[low] == nums[low + 1]) low++; // 去重
+                    while (low < high && nums[high] == nums[high - 1]) high--; // 去重
+                    low++;
+                    high--;
+                } else if (sum > 0) {
+                    high--;
+                } else {
+                    low++;
+                }
+
+            }
+        }
+        return res;
+    }
+}
+//runtime:31 ms
+//memory:44.4 MB

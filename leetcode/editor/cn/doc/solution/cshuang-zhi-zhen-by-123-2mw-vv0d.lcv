@@ -1,0 +1,40 @@
+### 解题思路
+
+1.排序
+2.双指针
+
+### 代码
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+
+        sort(nums.begin(), nums.end());
+        int ans = nums[0] + nums[1] + nums[2];
+        if (ans == target) return ans;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue; //去重
+            int l = i + 1;
+            int r = nums.size() - 1;
+            while (r > l) {
+                int tmp = nums[i] + nums[l] + nums[r];
+                if (abs(tmp - target) == 0) return tmp;
+                if (abs(tmp - target) < abs(ans - target)) ans = tmp;
+                if (tmp > target) {
+                    while (r > l && nums[r] == nums[r - 1]) --r; //去重
+                    --r;
+                }
+                if (tmp < target) {
+                    while (r > l && nums[l] == nums[l + 1]) ++l; //去重
+                    ++l;
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+

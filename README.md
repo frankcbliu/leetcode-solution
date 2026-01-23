@@ -168,5 +168,5 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ## 8. X数之和
 - [x] [两数之和](./leetcode/editor/cn/1-two-sum.cpp)
-- [ ] [三数之和](./leetcode/editor/cn)
-- [ ] [最接近的三数之和](./leetcode/editor/cn)
+- [x] [三数之和](./leetcode/editor/cn/15-3sum.cpp)
+- [x] [最接近的三数之和](./leetcode/editor/cn/16-3sum-closest.cpp)

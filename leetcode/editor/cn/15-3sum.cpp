@@ -41,92 +41,42 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    // 在一个函数中完成所有实现
-    vector<vector<int>> threeSum(vector<int> &nums) {
-      // 0.初始化
-      int n = nums.size();
-      vector<vector<int>> res;
-      if (n < 3) return res;
-      res.reserve(64);
-      // 1.排序
-      sort(nums.begin(), nums.end());
-      // 2. 穷举第一个数
-      for (int i = 0; i < n - 2; ++i) {
-        int a = nums[i];
-        // 计算后面的数组中的两数之和
-        int l = i + 1, r = n - 1;
-        while (l < r) {
-          // 三数之和
-          int sum = a + nums[l] + nums[r];
-          int b = nums[l], c = nums[r];
-          if (sum > 0) {
-            while (l < r && nums[r] == c) r--;
-          } else if (sum < 0) {
-            while (l < r && nums[l] == b) l++;
-          } else { // sum == 0
-            res.push_back({a, b, c});
-            while (l < r && nums[l] == b) l++;
-            while (l < r && nums[r] == c) r--;
-          }
-        }
-        while (i < n - 1 && nums[i] == nums[i+1]) i++;
-      }
-      return res;
-    }
+  public:
+  // 在一个函数中完成所有实现
+  vector<vector<int>> threeSum(vector<int> &nums) {
+    vector<vector<int>> res;
+    size_t n = nums.size();
+    if (n < 3) return res;
+    sort(nums.begin(), nums.end());
 
+    // a:0 ~ n-2, b, c
+    for (int i = 0; i < n - 2; ++i) {
+      if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-    vector<vector<int>> threeSum2(vector<int> &nums) {
-      // 排序
-      sort(nums.begin(), nums.end());
-      size_t n = nums.size();
-      vector<vector<int>> res;
-      // 穷举第一个数
-      for (int i = 0; i < n; ++i) {
-        int a = nums[i];
-        vector<vector<int>> two_res = twoSum(nums, i + 1, 0 - a);
-        for (vector<int> &vec: two_res) {
-          vec.push_back(a);
-          res.push_back(vec);
-        }
-        while (i < n - 1 && nums[i] == nums[i + 1]) i++;
-      }
-      return res;
-    }
-
-private:
-    /**
-     * 计算数组所有相加等于 target 的情况
-     * @param nums 有序数组
-     * @param target 两数之和目标值
-     * @return
-     */
-    vector<vector<int>> twoSum(vector<int> &nums, int start, int target) {
-      // 双指针
-      int l = start, r = int(nums.size()) - 1;
-      vector<vector<int>> res;
+      int a = nums[i];
+      int l = i + 1, r = n - 1;
       while (l < r) {
-        int sum = nums[l] + nums[r];
-        int left = nums[l], right = nums[r];
-        if (sum < target) {
-          while (l < r && nums[l] == left) l++;
-        } else if (sum > target) {
-          while (l < r && nums[r] == right) r--;
-        } else { // 相等的情况
-          res.push_back({left, right});
-          while (l < r && nums[l] == left) l++;
-          while (l < r && nums[r] == right) r--;
+        int b = nums[l], c = nums[r];
+        if (a + b + c < 0) {
+          while (l < r && nums[l] == b) ++l;
+        } else if (a + b + c > 0) {
+          while (l < r && nums[r] == c) --r;
+        } else {
+          res.push_back({a, b, c});
+          while (l < r && nums[l] == b) ++l;
+          while (l < r && nums[r] == c) --r;
         }
       }
-      return res;
     }
+    return res;
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
   Solution s;
-  vector<int> arr{-1, 0, 1, 2, -1, -4};
-  auto res = s.threeSum2(arr);
+  vector<int> arr{-100, -70, -60, 110, 120, 130, 160};
+  auto res = s.threeSum(arr);
   showVector2(res);
 }
