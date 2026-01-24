@@ -173,4 +173,11 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [长度最小的子数组](./leetcode/editor/cn/209-minimum-size-subarray-sum.cpp)
 - [x] [乘积小于K的子数组](./leetcode/editor/cn/713-subarray-product-less-than-k.cpp)
 - [x] [无重复字符的最长子串](./leetcode/editor/cn/3-longest-substring-without-repeating-characters.cpp)
+- [x] [盛最多的雨水](./leetcode/editor/cn/11-container-with-most-water.cpp)
+- [x] [接雨水](./leetcode/editor/cn/42-trapping-rain-water.cpp)
 
+## 9. 单调栈
+- [x] [每日温度](./leetcode/editor/cn/739-daily-temperatures.cpp)
+- [x] [接雨水](./leetcode/editor/cn/42-trapping-rain-water.cpp)
+- [x] [下一个更大元素I](./leetcode/editor/cn/496-next-greater-element-i.cpp)
+- [x] [下一个更大元素II](./leetcode/editor/cn/503-next-greater-element-ii.cpp)
