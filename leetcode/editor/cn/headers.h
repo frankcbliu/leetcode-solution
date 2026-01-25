@@ -10,8 +10,8 @@
 #include <iostream>
 #include <queue>
 #include <random>
-#include <string>
 #include <stack>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -70,26 +70,29 @@ struct TreeNode {
   TreeNode() : val(0), left(nullptr), right(nullptr) {}
   TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
   TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-  TreeNode *ArrayTree(vector<int> nums, int i, int n) {
-    TreeNode *p = nullptr;
-    if (i > n || nums.empty() || nums[i] == -1) {
-      return p;
+
+
+  // 从数组构建的构造函数
+  TreeNode(const vector<int> &nums) : val(0), left(nullptr), right(nullptr) {
+    if (!nums.empty()) {
+      TreeNode *temp = ArrayTree(nums, 0, nums.size());
+      if (temp) {
+        this->val = temp->val;
+        this->left = temp->left;
+        this->right = temp->right;
+        delete temp;// 释放临时对象
+      }
     }
-    if (i < n) {
-      p = new TreeNode();
-      p->val = nums[i];
-      p->left = ArrayTree(nums, 2 * i + 1, n);
-      p->right = ArrayTree(nums, 2 * i + 2, n);
-    }
-    return p;
   }
-  TreeNode(vector<int> nums) {
-    if (nums.empty())
-      return;
-    TreeNode *data = ArrayTree(nums, 0, nums.size());
-    this->val = data->val;
-    this->left = data->left;
-    this->right = data->right;
+
+  TreeNode *ArrayTree(vector<int> nums, int i, int n) {
+    if (i >= n || nums[i] == -1) {
+      return nullptr;
+    }
+    auto *p = new TreeNode(nums[i]);
+    p->left = ArrayTree(nums, 2 * i + 1, n);
+    p->right = ArrayTree(nums, 2 * i + 2, n);
+    return p;
   }
 };
 

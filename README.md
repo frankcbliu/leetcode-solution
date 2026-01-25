@@ -146,6 +146,9 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [138-随机链表的复制](./leetcode/editor/cn/138-copy-list-with-random-pointer.cpp)
 
 ## 6. 二叉树
+- [x] [相同的树](./leetcode/editor/cn/100-same-tree.cpp)
+- [x] [对称二叉树](./leetcode/editor/cn/101-symmetric-tree.cpp)
+- [x] [平衡二叉树](./leetcode/editor/cn/110-balanced-binary-tree.cpp)
 - [x] [翻转二叉树](./leetcode/editor/cn/226-invert-binary-tree.cpp)
 - [x] [二叉树的最大深度](./leetcode/editor/cn/104-maximum-depth-of-binary-tree.cpp)
 - [x] [二叉树的最小深度](./leetcode/editor/cn/111-minimum-depth-of-binary-tree.cpp)
