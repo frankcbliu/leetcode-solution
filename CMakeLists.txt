@@ -5,7 +5,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(cn/C++/algm)
 
-add_executable(1-two-sum leetcode/editor/cn/1-two-sum.cpp leetcode/editor/cn/headers.h)
+add_executable(1-two-sum leetcode/editor/cn/1-two-sum.cpp leetcode/editor/cn/headers.h
+        interview/odd_printer.cpp)
 
 add_executable(contest contest.cpp leetcode/editor/cn/headers.h)
 add_executable(376-wiggle-subsequence leetcode/editor/cn/376-wiggle-subsequence.cpp)
