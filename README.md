@@ -184,3 +184,6 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 - [x] [接雨水](./leetcode/editor/cn/42-trapping-rain-water.cpp)
 - [x] [下一个更大元素I](./leetcode/editor/cn/496-next-greater-element-i.cpp)
 - [x] [下一个更大元素II](./leetcode/editor/cn/503-next-greater-element-ii.cpp)
+
+## 10. 其他
+- [x] [多线程打印数字](./interview/odd_printer.cpp)

@@ -26,3 +26,4 @@ add_executable(bubble_sort sort/bubble_sort.cc
         sort/select_sort.cc
         sort/insert_sort.cc
         sort/merge_sort.cc)
+add_executable(even_printer interview/even_printer.cc)
