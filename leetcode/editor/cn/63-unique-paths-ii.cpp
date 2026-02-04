@@ -45,56 +45,84 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    int uniquePathsWithObstacles(vector<vector<int>> &obstacleGrid) {
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
-        if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1)
-            return 0;
-        // 优化空间
-        vector<int> dp(n, 0);
-        for (int i = 0; i < n && obstacleGrid[0][i] == 0; ++i) dp[i] = 1;
+  public:
+  int uniquePathsWithObstacles(vector<vector<int>> &obstacleGrid) {
+    // 1. dp方程式不变: dp[i][j] = dp[i-1][j] + dp[i][j-1]
+    // 2. 障碍物位置: dp[i][j] = 0
+    int m = obstacleGrid.size();
+    int n = obstacleGrid[0].size();
 
-        // 计算
-        for (int i = 1; i < m; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (obstacleGrid[i][j] == 1)
-                    dp[j] = 0;
-                else if (j != 0)
-                    dp[j] += dp[j - 1];
-            }
-        }
-        return dp[n - 1];
+    vector<vector<int>> dp(m, vector<int>(n, 0));
+    // 初始化, 加入障碍物判断逻辑
+    for (int i = 0; i < m; ++i) {  // 可以优化为 i<m && obstacleGrid[i][0] == 0
+      if (obstacleGrid[i][0] == 1) break;
+      dp[i][0] = 1;
     }
-    int uniquePathsWithObstacles2(vector<vector<int>> &obstacleGrid) {
-        int m = obstacleGrid.size();
-        int n = obstacleGrid[0].size();
-        if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1)
-            return 0;
-
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        for (int i = 0; i < m && obstacleGrid[i][0] == 0; ++i) dp[i][0] = 1;
-        for (int i = 0; i < n && obstacleGrid[0][i] == 0; ++i) dp[0][i] = 1;
-
-        // 计算
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j) {
-                if (obstacleGrid[i][j] == 1)
-                    dp[i][j] = 0;
-                else {
-                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-                }
-            }
-        }
-        return dp[m - 1][n - 1];
+    for (int j = 0; j < n; ++j) {
+      if (obstacleGrid[0][j] == 1) break;
+      dp[0][j] = 1;
     }
+
+    for (int i = 1; i < m; ++i) {
+      for (int j = 1; j < n; ++j) {
+        if (obstacleGrid[i][j] == 1)
+          dp[i][j] = 0;
+        else
+          dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+      }
+    }
+    return dp[m - 1][n - 1];
+  }
+
+  int uniquePathsWithObstacles3(vector<vector<int>> &obstacleGrid) {
+    int m = obstacleGrid.size();
+    int n = obstacleGrid[0].size();
+    if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1)
+      return 0;
+    // 优化空间
+    vector<int> dp(n, 0);
+    for (int i = 0; i < n && obstacleGrid[0][i] == 0; ++i) dp[i] = 1;
+
+    // 计算
+    for (int i = 1; i < m; ++i) {
+      for (int j = 0; j < n; ++j) {
+        if (obstacleGrid[i][j] == 1)
+          dp[j] = 0;
+        else if (j != 0)
+          dp[j] += dp[j - 1];
+      }
+    }
+    return dp[n - 1];
+  }
+  int uniquePathsWithObstacles2(vector<vector<int>> &obstacleGrid) {
+    int m = obstacleGrid.size();
+    int n = obstacleGrid[0].size();
+    if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1)
+      return 0;
+
+    vector<vector<int>> dp(m, vector<int>(n, 0));
+    for (int i = 0; i < m && obstacleGrid[i][0] == 0; ++i) dp[i][0] = 1;
+    for (int i = 0; i < n && obstacleGrid[0][i] == 0; ++i) dp[0][i] = 1;
+
+    // 计算
+    for (int i = 1; i < m; ++i) {
+      for (int j = 1; j < n; ++j) {
+        if (obstacleGrid[i][j] == 1)
+          dp[i][j] = 0;
+        else {
+          dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+        }
+      }
+    }
+    return dp[m - 1][n - 1];
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> arr{7, 1, 5, 3, 6, 4};
-    auto res = s.twoSum(arr, 11);
-    showVector(res);
+  Solution s;
+  vector<int> arr{7, 1, 5, 3, 6, 4};
+  auto res = s.twoSum(arr, 11);
+  showVector(res);
 }

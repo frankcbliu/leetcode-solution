@@ -48,59 +48,67 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    // 二刷
-    int minCostClimbingStairs(vector<int> &cost) {
-        int n = cost.size();
-        // 1. dp[i] 到达 第 i 级台阶需要花费的最小金额
-        vector<int> dp(n + 1);
-        // 2. dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]cost[i-2]);
-        for (int i = 2; i <= n; ++i) {
-            dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
-        }
-        return dp[n];
+  public:
+  // 三刷
+  int minCostClimbingStairs(vector<int> &cost) {
+    int n = cost.size();
+    //    vector<int> dp(n+1, 0);
+    //    // 初始化很重要，dp[n] 是到达第 n 阶台阶的最低花费
+    //    dp[0] = 0;
+    //    dp[1] = 0;
+    //    for (int i = 2; i <= n; ++i) {
+    //      dp[i] = min(cost[i - 2] + dp[i - 2], cost[i - 1] + dp[i - 1]);
+    //    }
+    // 优化内存方法，可以用两个变量滚动存储 dp[i-2] 和 dp[i-1]
+    int dp2 = 0, dp1 = 0;
+    for (int i = 2; i <= n; ++i) {
+      int t = min(cost[i - 2] + dp2, cost[i - 1] + dp1);// 小的放前面，不容易搞错
+      dp2 = dp1;
+      dp1 = t;
     }
+    return dp1;
+  }
 
-    int minCostClimbingStairs2(vector<int> &cost) {
-        size_t n = cost.size();
-        if (n <= 1) return 0;
-        // 1. dp[n] 到达第 n 级台阶，所花费的最小金额
-        // 2. 递推公式: dp[n] = min(dp[n-1]+cost[n-1], dp[n-2]+cost[n-2])
-        // 3. 初始化
-        //    dp[0] = 0, dp[1] = 0
-        int dp[n + 1];
-        dp[0] = 0;
-        dp[1] = 0;
-        // 4. 遍历顺序
-        for (int i = 2; i <= n; ++i) {
-            dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
-        }
-        // dp[2] = min(dp[0]+cost[0], dp[1]+cost[1]);
-        return dp[n];
+  int minCostClimbingStairs2(vector<int> &cost) {
+    size_t n = cost.size();
+    if (n <= 1) return 0;
+    // 1. dp[n] 到达第 n 级台阶，所花费的最小金额
+    // 2. 递推公式: dp[n] = min(dp[n-1]+cost[n-1], dp[n-2]+cost[n-2])
+    // 3. 初始化
+    //    dp[0] = 0, dp[1] = 0
+    int dp[n + 1];
+    dp[0] = 0;
+    dp[1] = 0;
+    // 4. 遍历顺序
+    for (int i = 2; i <= n; ++i) {
+      dp[i] = min(dp[i - 1] + cost[i - 1], dp[i - 2] + cost[i - 2]);
     }
+    // dp[2] = min(dp[0]+cost[0], dp[1]+cost[1]);
+    return dp[n];
+  }
 
-    //    优化内存版本
-    int minCostClimbingStairs1(vector<int> &cost) {
-        size_t n = cost.size();
-        if (n <= 1) return 0;
-        int dp0, dp1, res;
-        dp0 = 0;
-        dp1 = 0;
-        // 0, 0, cost[0]
-        for (int i = 2; i <= n; ++i) {
-            res = min(dp0 + cost[i - 2], dp1 + cost[i - 1]);
-            dp0 = dp1;
-            dp1 = res;
-        }
-        return res;
+  //    优化内存版本
+  int minCostClimbingStairs1(vector<int> &cost) {
+    size_t n = cost.size();
+    if (n <= 1) return 0;
+    int dp0, dp1, res;
+    dp0 = 0;
+    dp1 = 0;
+    // 0, 0, cost[0]
+    for (int i = 2; i <= n; ++i) {
+      res = min(dp0 + cost[i - 2], dp1 + cost[i - 1]);
+      dp0 = dp1;
+      dp1 = res;
     }
+    return res;
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> cost{1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
-    auto res = s.minCostClimbingStairs(cost);
-    cout << res << endl;
+  Solution s;
+  vector<int> cost{1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+  auto res = s.minCostClimbingStairs(cost);
+  cout << res << endl;
 }

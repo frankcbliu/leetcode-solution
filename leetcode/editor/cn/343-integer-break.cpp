@@ -33,29 +33,46 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    int integerBreak(int n) {
-        vector<int> dp(n + 1, 0);
-        // 1. dp[i]: 拆分正整数i, 能得到的最大乘积
-        // 2. dp[i] = max(dp[i], max(j*(i-j), j*dp[i-j]))
-        //    单独解释: max(j*(i-j), j*dp[i-j])
-        //            - 拆成两个整数: j, i-j
-        //            - 拆成多个整数: j, dp[i-j] (即对 i-j 进行拆分), 这里至少 >= 3
-        // 3. 初始化
-        //    dp[2] = 1
-        dp[2] = 1;
-        for (int i = 3; i <= n; ++i) {
-            for (int j = 1; j < i - 1; ++j) {
-                dp[i] = max(dp[i], max(j * (i - j), j * dp[i - j]));
-            }
-        }
-        return dp[n];
+  public:
+  int integerBreak(int n) {
+    // 拆成多个，那么其实一定先可以拆成 2 个
+    // i 拆成 j 和 i-j, 那么要考虑 i-j 是否继续拆
+    // dp[i] = max(j*(i-j), j*dp[i-j]),
+
+    vector<int> dp(n + 1, 0);
+    dp[1] = 1;
+    dp[2] = 1;
+    for (int i = 3; i <= n; ++i) {
+      int m = i / 2;
+      for (int j = 1; j <= m; ++j) {
+        dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));
+      }
     }
+    return dp[n];
+  }
+
+  int integerBreak2(int n) {
+    vector<int> dp(n + 1, 0);
+    // 1. dp[i]: 拆分正整数i, 能得到的最大乘积
+    // 2. dp[i] = max(dp[i], max(j*(i-j), j*dp[i-j]))
+    //    单独解释: max(j*(i-j), j*dp[i-j])
+    //            - 拆成两个整数: j, i-j
+    //            - 拆成多个整数: j, dp[i-j] (即对 i-j 进行拆分), 这里至少 >= 3
+    // 3. 初始化
+    //    dp[2] = 1
+    dp[2] = 1;
+    for (int i = 3; i <= n; ++i) {
+      for (int j = 1; j < i - 1; ++j) {
+        dp[i] = max(dp[i], max(j * (i - j), j * dp[i - j]));
+      }
+    }
+    return dp[n];
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    cout << s.integerBreak(12);
+  Solution s;
+  cout << s.integerBreak(10);
 }

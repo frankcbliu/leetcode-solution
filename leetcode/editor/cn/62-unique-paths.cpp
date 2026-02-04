@@ -53,36 +53,55 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    int uniquePaths(int m, int n) {
-        // 使用一维数组滚动，优化空间
-        int dp[n];
-        for (int i = 0; i < n; ++i) dp[i] = 1;
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j) {
-                dp[j] += dp[j - 1];
-            }
-        }
-        return dp[n - 1];
+  public:
+  // 只能从上方或者左边来,所以等于左边和上边的路径和
+  // dp[i][j] = dp[i-1][j] + dp[i][j-1]
+  int uniquePaths2(int m, int n) {
+    vector<vector<int>> dp(m, vector<int>(n, 0));
+    // 初始化最上边和最左边
+    for (int i = 0; i < m; ++i) dp[i][0] = 1;
+    for (int j = 0; j < n; ++j) dp[0][j] = 1;
+
+    for (int i = 1; i < m; ++i) {
+      for (int j = 1; j < n; ++j) {
+        dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
+      }
     }
-    int uniquePaths2(int m, int n) {
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        for (int i = 0; i < m; ++i) dp[i][0] = 1;
-        for (int i = 0; i < n; ++i) dp[0][i] = 1;
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j) {
-                dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
-            }
-        }
-        return dp[m - 1][n - 1];
+    // 注意到，每次只使用左边和上边，使用一维数组，也就是前一个位置的值，和当前位置的历史值
+    // 因此可以使用一维数组滚动更新进行优化
+    return dp[m - 1][n - 1];
+  }
+
+  // 滚动更新版本
+  int uniquePaths(int m, int n) {
+    vector<int> res(n, 1);
+    for (int i = 1; i < m; ++i) {
+      for (int j = 1; j < n; ++j) {
+        res[j] = res[j - 1] + res[j];
+      }
     }
+    return res[n - 1];
+  }
+
+
+  int uniquePaths3(int m, int n) {
+    // 使用一维数组滚动，优化空间
+    int dp[n];
+    for (int i = 0; i < n; ++i) dp[i] = 1;
+    for (int i = 1; i < m; ++i) {
+      for (int j = 1; j < n; ++j) {
+        dp[j] += dp[j - 1];
+      }
+    }
+    return dp[n - 1];
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> arr{7, 1, 5, 3, 6, 4};
-    auto res = s.twoSum(arr, 11);
-    showVector(res);
+  Solution s;
+  vector<int> arr{7, 1, 5, 3, 6, 4};
+  auto res = s.twoSum(arr, 11);
+  showVector(res);
 }

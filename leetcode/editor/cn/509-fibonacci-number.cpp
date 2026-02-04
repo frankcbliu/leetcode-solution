@@ -48,42 +48,46 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    // 压缩空间版本
-    int fib(int n) {
-        if (n <= 1) return n;
-        int a = 0, b = 1;
-        for (int i = 2; i <= n; ++i) {
-            int t = a;
-            a = b;
-            b += t;
-        }
-        return b;
-    }
+  public:
+  // 递归算法
+  int fib1(int n) {
+    if (n <= 1) return n;
+    return fib(n - 1) + fib(n - 2);
+  }
 
-    int fib2(int n) {
-        // 边界条件
-        if (n <= 1) return n;
-        vector<int> dp(n + 1);
-        // 1. dp[i]: 表示 F(n), n=i
-        // 2. dp[n] = dp[n-1] + dp[n-2] (n >= 2)
-        // 3. 初始化
-        dp[0] = 0;
-        dp[1] = 1;
-        for (int i = 2; i <= n; ++i) {
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
-        return dp[n];
+  // 迭代算法
+  int fib2(int n ) {
+    if (n<=1) return n;
+    vector<int> dp(n+1,0);
+    dp[0] = 0;
+    dp[1] = 1;
+    for(int i = 2; i<=n; i++) {
+      dp[i] = dp[i-1] + dp[i-2];
     }
+    return dp[n];
+  }
+
+  // 压缩空间的迭代版本
+  int fib(int n) {
+    if (n <= 1) return n;
+    int p = 0;
+    int q = 1;
+    for (int i = 2; i <= n ; ++i) {
+      int t = p + q;
+      p = q;
+      q = t;
+    }
+    return q;
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> arr{2, 7, 11, 15};
-    auto res = s.twoSum(arr, 9);
-    showVector(res);
-    arr = {3, 2, 4};
-    showVector(s.twoSum(arr, 6));
+  Solution s;
+  vector<int> arr{2, 7, 11, 15};
+  auto res = s.twoSum(arr, 9);
+  showVector(res);
+  arr = {3, 2, 4};
+  showVector(s.twoSum(arr, 6));
 }

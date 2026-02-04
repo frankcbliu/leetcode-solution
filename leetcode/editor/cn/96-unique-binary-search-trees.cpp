@@ -32,32 +32,51 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    int numTrees(int n) {
-        // 1.dp[i]: i个节点组成的二叉搜索树的组合个数
-        vector<int> dp(n + 1, 0);
-        // 2. 递推公式
-        // for(j: 1 -> i)
-        //  dp[i] += dp[j-1] * dp[i-j]
-        // 3. 初始化
-        dp[0] = 1; // 根据定义，0 节点也能算一个二叉搜索树(空二叉树)
-        dp[1] = 1;
-        for (int i = 2; i <= n; ++i) {
-            for (int j = 1; j <= i; ++j) {
-                dp[i] += dp[j - 1] * dp[i - j];
-            }
-        }
-        return dp[n];
+  public:
+  int numTrees(int n) {
+    // 根节点从 1 -> n, 左边是 dp[0]=1, 右边是 dp[n-1]
+    //                       dp[i] * dp[n-i]
+    //                       dp[n-1],      dp[0]
+    vector<int> dp(n + 1, 0);
+    dp[0] = 1;// 空节点也算一棵树
+    dp[1] = 1;
+    for (int i = 2; i <= n; ++i) {
+      // j: 根节点, 从 1->i
+      for (int j = 1; j <= i; ++j) {
+        // 核心计算左右子树的节点数，左子树是 j-1 个节点，右子树是 i-j 个节点
+        dp[i] += dp[j - 1] * dp[i - j];
+      }
     }
+    return dp[n];
+  }
+
+  int numTrees2(int n) {
+    // 1.dp[i]: i个节点组成的二叉搜索树的组合个数
+    vector<int> dp(n + 1, 0);
+    // 2. 递推公式
+    // for(j: 1 -> i)
+    //  dp[i] += dp[j-1] * dp[i-j]
+    // 3. 初始化
+    dp[0] = 1;// 根据定义，0 节点也能算一个二叉搜索树(空二叉树)
+    dp[1] = 1;
+    for (int i = 2; i <= n; ++i) {
+      for (int j = 1; j <= i; ++j) {
+        dp[i] += dp[j - 1] * dp[i - j];
+      }
+    }
+    return dp[n];
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> arr{2, 7, 11, 15};
-    auto res = s.twoSum(arr, 9);
-    showVector(res);
-    arr = {3, 2, 4};
-    showVector(s.twoSum(arr, 6));
+  Solution s;
+  int res;
+  res = s.numTrees(1);
+  cout << "n=1, res=" << res << endl;
+  res = s.numTrees(2);
+  cout << "n=2, res=" << res << endl;
+  res = s.numTrees(3);
+  cout << "n=3, res=" << res << endl;
 }
