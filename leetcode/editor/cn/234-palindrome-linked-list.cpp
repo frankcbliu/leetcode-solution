@@ -53,6 +53,7 @@ class Solution {
     auto arr = middle_and_pre(head);
     ListNode *pre_head2 = arr[0];
     ListNode *head2 = reverse(arr[1]);
+    ListNode *re_head2 = head2;
     bool is_pal = true;
     // 中点反转后对比
     while (head2 != nullptr) {
@@ -64,7 +65,7 @@ class Solution {
       head2 = head2->next;
     }
     // 复原
-    pre_head2->next = reverse(head2);
+    pre_head2->next = reverse(re_head2);
     return is_pal;
   }
 
