@@ -35,6 +35,12 @@
 class Solution {
 public:
     bool canPartition(vector<int> &nums) {
+      // 奇数和不可能分割成两个和相等的子集
+
+
+    }
+
+    bool canPartition2(vector<int> &nums) {
         int sum = 0;
         for (auto num: nums) {
             sum += num;
