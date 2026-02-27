@@ -34,6 +34,8 @@ headers.h 文件所在路径: `leetcode/editor/cn/headers.h`
 
 ## 1.动态规划
 
+### 线性DP
+
 - [x] [509-斐波那契数列](./leetcode/editor/cn/509-fibonacci-number.cpp)
 - [x] [70-爬楼梯](./leetcode/editor/cn/70-climbing-stairs.cpp)
 - [x] [746-使用最小花费爬楼梯](./leetcode/editor/cn/746-min-cost-climbing-stairs.cpp)
