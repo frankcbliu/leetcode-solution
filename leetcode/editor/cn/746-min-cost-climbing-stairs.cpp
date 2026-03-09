@@ -49,8 +49,22 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
   public:
-  // 三刷
+  // 四刷
   int minCostClimbingStairs(vector<int> &cost) {
+    int n = cost.size();
+    vector<int> dp(n+1, 0);
+    dp[0] = 0;
+    dp[1] = 0;
+    for (int i = 2; i <= n; ++i) {
+      dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2]);
+    }
+    // dp[i] 爬到i花费的最低价格
+    // dp[i] = min(dp[i-1]+cost[i-1], dp[i-2]+cost[i-2])
+    return dp[n];
+  }
+
+  // 三刷
+  int minCostClimbingStairs3(vector<int> &cost) {
     int n = cost.size();
     //    vector<int> dp(n+1, 0);
     //    // 初始化很重要，dp[n] 是到达第 n 阶台阶的最低花费

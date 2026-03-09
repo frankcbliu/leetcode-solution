@@ -40,8 +40,21 @@
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
   public:
-  // 利用完全背包解法
   int climbStairs(int n) {
+    if (n <= 2) return n;
+    // 节省空间法
+    int p0 = 1;
+    int p1 = 2;
+    for (int i = 3; i <= n; ++i) {
+      int p2 = p0 + p1;
+      p0 = p1;
+      p1 = p2;
+    }
+    return p1;
+  }
+
+  // 利用完全背包解法
+  int climbStairs4(int n) {
     int m = 2;
     // 1. dp[i]: 爬到第 i 级楼梯的组合数
     // 2. for(i: 0->n)

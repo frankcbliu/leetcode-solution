@@ -50,31 +50,42 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    int combinationSum4(vector<int> &nums, int target) {
-        int n = nums.size();
-        // 1. dp[i]: target 为 i 的排列组合数
-        // 2. for(i: 0 -> target) // 容量
-        //      for(j: 0 -> n-1)  // 物品
-        //          dp[i] += dp[i-nums[j]]
-        // 3. 初始化
-        vector<unsigned long long> dp(target + 1, 0);
-        dp[0] = 1;
-        for (int i = 0; i <= target; ++i) {// 容量
-            for (int j = 0; j < n; ++j) {  // 物品，计算不同的排列数
-                if (i >= nums[j]) // 过程卡常: && dp[i] < INT_MAX - dp[i - nums[j]], 更建议用 unsigned ll
-                    dp[i] += dp[i - nums[j]];
-            }
-        }
-        return dp[target];
+  public:
+  int combinationSum(vector<int> &nums, int target) {
+    vector<int> dp(target + 1, 0);
+    dp[0] = 1;
+    for (int i = 1; i <= target; ++i) {
+      for (int j: nums) {
+        if (i >= j)
+          dp[i] += dp[i - j];
+      }
     }
+    return dp[target];
+  }
+  int combinationSum4(vector<int> &nums, int target) {
+    int n = nums.size();
+    // 1. dp[i]: target 为 i 的排列组合数
+    // 2. for(i: 0 -> target) // 容量
+    //      for(j: 0 -> n-1)  // 物品
+    //          dp[i] += dp[i-nums[j]]
+    // 3. 初始化
+    vector<unsigned long long> dp(target + 1, 0);
+    dp[0] = 1;
+    for (int i = 0; i <= target; ++i) {// 容量
+      for (int j = 0; j < n; ++j) {    // 物品，计算不同的排列数
+        if (i >= nums[j])              // 过程卡常: && dp[i] < INT_MAX - dp[i - nums[j]], 更建议用 unsigned ll
+          dp[i] += dp[i - nums[j]];
+      }
+    }
+    return dp[target];
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> arr{7, 1, 5, 3, 6, 4};
-    auto res = s.twoSum(arr, 11);
-    showVector(res);
+  Solution s;
+  vector<int> arr{7, 1, 5, 3, 6, 4};
+  auto res = s.combinationSum(arr, 11);
+  cout << res;
 }

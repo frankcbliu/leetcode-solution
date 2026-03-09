@@ -61,7 +61,7 @@
 class Solution {
 public:
     int countTexts(string pressedKeys) {
-        // 映射 2-6,9 -> 3, 7-8 -> 4
+        // 映射 2-6,8 -> 3; 7,9 -> 4
         int m[10] = {0, 1, 3, 3, 3, 3, 3, 4, 3, 4};
         vector<pair<int, int>> cnt = {{m[pressedKeys[0] - '0'], 1}};
         int n = 0;

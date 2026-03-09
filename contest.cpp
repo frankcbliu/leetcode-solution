@@ -5,6 +5,9 @@
 #include <vector>
 using namespace std;
 
+// dp题目单
+//2266. 统计打字方案数(比较复杂) https://leetcode.cn/problems/count-number-of-texts/
+
 // 第一个大于等于 num 的元素下标
 int binarySearch(vector<int> &arr, int num) {
   int l = 0;

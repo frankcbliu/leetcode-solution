@@ -44,37 +44,63 @@
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-public:
-    int rob(vector<int> &nums) {
-        int n = nums.size();
-        if (n == 1)
-            return nums[0];
-        else if (n == 2)
-            return max(nums[0], nums[1]);
-        // 1. dpc[j]: 0...j 之间的最大金额，左右两端连接
-        //    dp[j]: 0...j 之间的最大金额，左右两端不连接
-        //    dp1[j]: 1...j 之间的最大金额，左右两端不连接
-        // 2. dpc[j] = max(dp[j-1], // 没有j
-        //                  dp[1...j-2] + nums[j])
-        // 3. 初始化
-        vector<int> dp(n, 0), dp1(n, 0);
-        dp[0] = nums[0];
-        dp1[1] = nums[1];
-        dp[1] = max(nums[0], nums[1]);
-        dp1[2] = max(nums[1], nums[2]);
-        for (int i = 2; i < n; ++i) {
-            dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);
-            if (i >= 3)
-                dp1[i] = max(dp1[i - 1], dp1[i - 2] + nums[i]);
-        }
-        return max(dp[n - 2], dp1[n - 3] + nums[n - 1]);
+  public:
+  int robRange(vector<int> &nums, int start, int end) {
+    int n = end - start + 1;
+    if (n < 1) return 0;
+    int p0 = nums[start];
+    int p1 = max(nums[start], nums[start + 1]);
+    if (n == 1) return p0;
+    if (n == 2) return p1;
+
+    for (int i = start + 2; i <= end; ++i) {
+      int p2 = max(p1, p0 + nums[i]);
+      p0 = p1;
+      p1 = p2;
     }
+    return p1;
+  }
+
+  int rob(vector<int> &nums) {
+    int n = nums.size();
+    if (n == 0) return 0;
+    if (n == 1) return nums[0];
+    if (n == 2) return max(nums[0], nums[1]);
+    return max(robRange(nums, 0, n - 2), robRange(nums, 1, n - 3) + nums[n - 1]);
+  }
+
+  int rob2(vector<int> &nums) {
+    int n = nums.size();
+    if (n == 1)
+      return nums[0];
+    else if (n == 2)
+      return max(nums[0], nums[1]);
+    // 1. dpc[j]: 0...j 之间的最大金额，左右两端连接
+    //    dp[j]: 0...j 之间的最大金额，左右两端不连接
+    //    dp1[j]: 1...j 之间的最大金额，左右两端不连接
+    // 2. dpc[j] = max(dp[j-1], // 没有j
+    //                  dp[1...j-2] + nums[j])
+    // 3. 初始化
+    vector<int> dp(n, 0), dp1(n, 0);
+    dp[0] = nums[0];
+    dp1[1] = nums[1];
+    dp[1] = max(nums[0], nums[1]);
+    dp1[2] = max(nums[1], nums[2]);
+    for (int i = 2; i < n; ++i) {
+      dp[i] = max(dp[i - 1], dp[i - 2] + nums[i]);
+      if (i >= 3)
+        dp1[i] = max(dp1[i - 1], dp1[i - 2] + nums[i]);
+    }
+    return max(dp[n - 2], dp1[n - 3] + nums[n - 1]);
+  }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
 int main() {
-    Solution s;
-    vector<int> arr{1, 1, 3, 6, 7, 10, 7, 1, 8, 5, 9, 1, 4, 4, 3};
-    cout << s.rob(arr) << endl; // 预期 41
+  Solution s;
+  vector<int> arr{1, 1, 3, 6, 7, 10, 7, 1, 8, 5, 9, 1, 4, 4, 3};
+  cout << s.rob(arr) << " " << s.rob2(arr) << endl;// 预期 41
+  vector<int> arr2{2, 3, 2};
+  cout << s.rob(arr2) << " " << s.rob2(arr2) << endl;// 预期 3
 }
